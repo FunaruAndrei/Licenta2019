@@ -1,0 +1,68 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Servicii oferite</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="p-3">
+    <div fxLayout="column">
+      
+      <div fxLayout="row">
+        <mat-form-field fxFlex>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+        <div fxFlex="2 2 calc(10em + 10px)"></div>
+        <div fxFlex fxLayoutAlign="end center">
+          <button mat-button color="accent" (click)="AddOperation()">
+            <mat-icon>add</mat-icon> Adauga
+          </button>
+        </div>
+      </div>
+
+      <div fxFlex fxLayout="column" class="mat-elevation-z8">
+        <table fxFlex mat-table [dataSource]="dataSource" matSort>
+
+          <ng-container matColumnDef="typeOp">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Tip operatie</mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element">
+              <img class="operation-image mr-3" [src]="'/images/Operations/' + element.operation.serviceOperationType.icon"/>
+              {{element.operation.serviceOperationType.name}}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="op">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Operatie</mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element"> {{element.operation.name}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="time">
+            <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Timp </mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element"> {{element.item.time}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="price">
+            <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Pret </mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element"> {{element.item.price}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <mat-header-cell mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element" fxLayoutAlign="end center">
+              <button mat-button color="accent" (click)="EditOperation(element)">
+                <mat-icon>edit</mat-icon> Editeaza
+              </button>
+              <button mat-button color="warn" (click)="DeleteOperation(element)">
+                <mat-icon>delete</mat-icon> Sterge
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+
+        </table>
+        <mat-paginator fxFlex [pageSizeOptions]="[5, 10, 20, 30]" showFirstLastButtons></mat-paginator>
+      </div>
+    </div>
+  </mat-card-content>
+
+</mat-card>

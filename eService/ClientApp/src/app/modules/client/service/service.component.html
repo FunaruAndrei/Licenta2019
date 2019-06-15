@@ -1,0 +1,123 @@
+<div class="search-page-wrapper">
+  <div fxLayout="column">
+    <section class="header-section" fxLayout="column" fxLayoutAlign="center">
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <div fxFlex="5">
+
+        </div>
+        <div fxFlex fxLayoutAlign="center center">
+          <img class="logo-image" src="/images/Logo/Logo-transparent-white.png" />
+        </div>
+        <div fxFlex="5" fxLayoutAlign="center center">
+          <span [matMenuTriggerFor]="appMenuSettings">
+            <i class="fas fa-cog fa-2x header-settings"></i>
+          </span>
+          <mat-menu #appMenuSettings="matMenu">
+            <a mat-menu-item *ngIf="user!=null" href="/Identity/Account/Login">Delogare</a>
+            <a mat-menu-item *ngIf="user==null">Autentifica-te</a>
+          </mat-menu>
+        </div>
+      </div>
+
+      <!--<div class="header-content" fxLayout="column" fxLayoutGap="20px">
+        <div fxLayoutAlign="center center" class="header-slogan" fxLayout="column">
+          <h1>Alege cel mai bun service</h1>
+          <h4>Service-urile auto sunt pretutindeni</h4>
+        </div>
+
+        <div fxLayout="row">
+          <div fxFlex="20"></div>
+          <div fxFlex="60" fxLayout="row" class="header-search">
+            <div class="header-search-city" fxFlex="30">
+              <mat-form-field class="w-100">
+                <input matInput placeholder="Oras" aria-label="Oras" [matAutocomplete]="auto" [formControl]="cityCtrl">
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="CitySelected($event.option.value)">
+                  <mat-option *ngFor="let state of filteredCities | async" [value]="state">
+                    <span>{{state.name}}</span> |
+                    <small>Judet: {{state.judet}}</small>
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+            <div class="header-search-city" fxFlex="30" style="padding-left: 20px;">
+              <mat-form-field class="w-100">
+                <input matInput placeholder="Tip serviciu" aria-label="Tip serviciu" [matAutocomplete]="autoa" [formControl]="typeCtrl">
+                <mat-autocomplete #autoa="matAutocomplete" [displayWith]="displayFn" (optionSelected)="TypeSelected($event.option.value)">
+                  <mat-option *ngFor="let type of filteredTypes | async" [value]="type">
+                    <img class="mr-3" aria-hidden [src]="'/images/Operations/' + type.icon" height="25">
+                    <span>{{type.name}}</span>
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+            <div class="header-search-city" fxFlex="30" style="padding-left: 20px;">
+              <mat-form-field class="w-100">
+                <input matInput placeholder="Brand masina" aria-label="Brand masina" [matAutocomplete]="autob" [formControl]="brandCtrl">
+                <mat-autocomplete #autob="matAutocomplete" [displayWith]="displayFn" (optionSelected)="BrandSelected($event.option.value)">
+                  <mat-option *ngFor="let bd of filteredBrands | async" [value]="bd">
+                    <img class="mr-3" aria-hidden [src]="'/images/CarLogos/' + bd.icon" height="25">
+                    <span>{{bd.name}}</span>
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+            <div fxFlex="10" style="padding-left: 20px; padding-top: 10px;">
+              <a mat-button color="primary" class="w-100"
+                 (click)="GoToServices()">
+                Cauta
+              </a>
+            </div>
+          </div>
+
+          <div fxFlex="20"></div>
+        </div>
+      </div>-->
+
+    </section>
+    <section class="basic-info" fxLayout="row">
+      <div fxFlex="20">
+
+      </div>
+      <div fxFlex="60" fxLayout="row" fxLayoutAlign="center center">
+        <div fxFlex fxLayoutAlign="start center">
+          <div class="basic-info-container" fxLayout="column">
+            <div class="basic-info-logo" fxLayoutAlign="center center">
+              <img [src]="GetLogoSrc()"/>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div fxFlex="20">
+      </div>
+    </section>
+    <!--<section class="service-categories after-counter" fxLayout="row">
+      <div fxFlex="20">
+
+      </div>
+      <div fxFlex="60">
+        <h2 class="section-title">
+          Categorii de servicii
+        </h2>
+        <div class="service-categories-types" fxLayout="row" fxLayoutAlign="space-between center">
+          <button mat-button *ngFor="let type of opTypes" fxLayoutAlign="center center" matTooltip="{{type.name}}" (click)="SelectType(type)">
+            <img aria-hidden [src]="'/images/Operations/' + type.icon" height="50">
+          </button>
+        </div>
+        <div>
+          <h3 class="service-categories-types-selected">
+            Categorie servicii <span>{{displayFn(selectedType)}}</span>
+          </h3>
+        </div>
+        <div fxLayout="row wrap" class="service-categories-items" fxLayoutGap="10px">
+          <span fxFlex="0 1 calc(25%-10px)" *ngFor="let op of filteredOperations" fxLayoutAlign="center center">
+            {{op.name}}
+          </span>
+        </div>
+      </div>
+      <div fxFlex="20">
+      </div>
+    </section>-->
+
+    <section class="partners-section last-section"></section>
+  </div>
+</div>

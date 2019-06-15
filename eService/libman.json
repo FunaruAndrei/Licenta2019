@@ -6,12 +6,16 @@
       "provider": "cdnjs",
       "library": "material-components-web@2.3.0",
       "destination": "wwwroot/lib/material-components-web/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "font-awesome@5.8.2",
+      "destination": "wwwroot/lib/font-awesome/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "izitoast@1.4.0",
+      "destination": "wwwroot/lib/izitoast/"
     }
-  ,
-{
-  "provider": "cdnjs",
-  "library": "font-awesome@5.8.2",
-  "destination": "wwwroot/lib/font-awesome/"
-}
-]
+  ]
 }

@@ -1,0 +1,54 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Branduri masini acceptate</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="p-3">
+    <div fxLayout="column">
+      
+      <div fxLayout="row">
+        <mat-form-field fxFlex>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+        <div fxFlex="2 2 calc(10em + 10px)"></div>
+      </div>
+
+      <div fxFlex fxLayout="column" class="mat-elevation-z8">
+        <table fxFlex mat-table [dataSource]="dataSource" matSort>
+
+          <ng-container matColumnDef="icon">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Icon </mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element">
+               <img class="car-logo" [src]="'/images/CarLogos/'+element.icon"/>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="name">
+            <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Denumire </mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="id">
+            <mat-header-cell mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element" fxLayoutAlign="end center">
+              <button mat-button color="accent" *ngIf="element.id == 0" (click)="AddManufacturer(element)">
+                <mat-icon>add</mat-icon> Adauga
+              </button>
+              <button mat-button color="warn" *ngIf="element.id != 0" (click)="DeleteManufacturer(element)">
+                <mat-icon>delete</mat-icon> Sterge
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+
+        </table>
+        <mat-paginator fxFlex [pageSizeOptions]="[5, 10, 20, 30]" showFirstLastButtons></mat-paginator>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-button color="primary">Salveaza</button>
+  </mat-card-actions>
+</mat-card>

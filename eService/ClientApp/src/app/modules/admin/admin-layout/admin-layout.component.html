@@ -1,0 +1,30 @@
+<div fxLayout="column">
+  <mat-toolbar color="primary" fxLayout="row">
+    <mat-toolbar-row class="admin-toolbar" fxLayout="row wrap" fxFlex="66" fxFlexOffset="15">
+
+      <img class="img-fluid" src="/images/Logo/Logo-transparent-white.png" style="height: inherit" alt="Logo" />
+      <span class="example-spacer"></span>
+      <button mat-button [matMenuTriggerFor]="menu">
+        Service-ul meu
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="GoToGeneralInfo()">
+          <i class="fas fa-info-circle"></i>
+          Informatii generale
+        </button>
+        <button mat-menu-item *ngFor="let item of locations" (click)="GoToLocation(item)">
+          <i class="fas fa-warehouse"></i> {{item.name}}
+        </button>
+          <button mat-menu-item [disabled]="!generalInfoCompleted" (click)="AddNewLocation()">
+            <i class="fas fa-plus"></i> Adauga locatie noua
+          </button>
+      </mat-menu>
+      <a mat-button href="/Identity/Account/LogoutAdmin">Sign out</a>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+
+  <div fxLayout="column" fxFlexOffset="2">
+       <router-outlet></router-outlet>
+  </div>
+</div>

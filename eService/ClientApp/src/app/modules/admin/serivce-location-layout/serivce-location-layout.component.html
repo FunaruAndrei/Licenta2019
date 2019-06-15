@@ -1,0 +1,46 @@
+<div fxFlex fxLayout="row">
+  <div fxFlex="66" fxFlexOffset="15" fxLayout="column" fxLayoutGap="30px" class="pl-1 pr-4 mb-5">
+    <app-location-info id="location-info" [cities]="cities"></app-location-info>
+    <app-location-contact [ctypes]="contactTypes" id="location-contact"></app-location-contact>
+    <app-location-program id="location-program"></app-location-program>
+    <app-location-facilities [facilities]="serviceFacilities" id="location-facilities"></app-location-facilities>
+    <app-location-manufacturers [brands]="carManufacturers" id="location-manufacturers"></app-location-manufacturers>
+    <app-location-operations [op]="serviceOperations" [opTypes]="serviceOperationTypes" id="location-operations"></app-location-operations>
+    <app-location-images id="location-images"></app-location-images>
+    <!--<app-location-promotions id="location-promotions"></app-location-promotions>-->
+  </div>
+  <div>
+    <div class="toc-container">
+      <mat-list>
+        <h3 mat-subheader>Sectiuni</h3>
+        <mat-list-item>
+          <div mat-line>
+            <a mat-button [ngx-scroll-to]="'location-info'" [ngx-scroll-to-offset]="-100">Informatii generale locatie</a>
+          </div>
+          <div mat-line>
+            <a mat-button [ngx-scroll-to]="'location-contact'" [ngx-scroll-to-offset]="-100">Contact locatie</a>
+          </div>
+          <div mat-line>
+            <a mat-button [ngx-scroll-to]="'location-program'" [ngx-scroll-to-offset]="-100">Program locatie</a>
+          </div>
+          <div mat-line>
+            <a mat-button [ngx-scroll-to]="'location-facilities'" [ngx-scroll-to-offset]="-100">Facilitati locatie</a>
+          </div>
+          <div mat-line>
+            <a mat-button [ngx-scroll-to]="'location-manufacturers'" [ngx-scroll-to-offset]="-100">Branduri masini acceptate</a>
+          </div>
+          <div mat-line>
+            <a mat-button [ngx-scroll-to]="'location-operations'" [ngx-scroll-to-offset]="-100">Servicii oferite</a>
+          </div>
+          <div mat-line>
+            <a mat-button [ngx-scroll-to]="'location-images'" [ngx-scroll-to-offset]="-100">Imagini service</a>
+          </div>
+          <div mat-line>
+            <a mat-button [ngx-scroll-to]="'location-promotions'" [ngx-scroll-to-offset]="-100">Promotii</a>
+          </div>
+        </mat-list-item>
+
+      </mat-list>
+    </div>
+  </div>
+</div>

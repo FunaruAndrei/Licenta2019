@@ -96,6 +96,351 @@ namespace Domain.EF.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Domain.Models.Nomenclatoare.CarManufacturer", b =>
+                {
+                    b.Property<int>("CarManufacturerId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Icon");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("CarManufacturerId");
+
+                    b.ToTable("CarManufacturers");
+                });
+
+            modelBuilder.Entity("Domain.Models.Nomenclatoare.City", b =>
+                {
+                    b.Property<int>("CityId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Judet");
+
+                    b.Property<string>("JudetAuto");
+
+                    b.Property<decimal>("Latitude")
+                        .HasColumnType("decimal(18, 9)");
+
+                    b.Property<decimal>("Longitude")
+                        .HasColumnType("decimal(18, 9)");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("CityId");
+
+                    b.ToTable("Cities");
+                });
+
+            modelBuilder.Entity("Domain.Models.Nomenclatoare.ContactType", b =>
+                {
+                    b.Property<int>("ContactTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Icon");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.HasKey("ContactTypeId");
+
+                    b.ToTable("ContactTypes");
+                });
+
+            modelBuilder.Entity("Domain.Models.Nomenclatoare.ServiceFacility", b =>
+                {
+                    b.Property<int>("ServiceFacilityId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Icon");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("ServiceFacilityId");
+
+                    b.ToTable("ServiceFacilities");
+                });
+
+            modelBuilder.Entity("Domain.Models.Nomenclatoare.ServiceOperation", b =>
+                {
+                    b.Property<int>("ServiceOperationId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Icon");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<int?>("ServiceOperationTypeId");
+
+                    b.HasKey("ServiceOperationId");
+
+                    b.HasIndex("ServiceOperationTypeId");
+
+                    b.ToTable("ServiceOperations");
+                });
+
+            modelBuilder.Entity("Domain.Models.Nomenclatoare.ServiceOperationType", b =>
+                {
+                    b.Property<int>("ServiceOperationTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Icon");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.HasKey("ServiceOperationTypeId");
+
+                    b.ToTable("ServiceOperationTypes");
+                });
+
+            modelBuilder.Entity("Domain.Models.Services.ServiceInfo", b =>
+                {
+                    b.Property<int>("ServiceInfoId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AdresaSediuSocial");
+
+                    b.Property<string>("Descriere");
+
+                    b.Property<string>("EmailDelegat");
+
+                    b.Property<string>("Logo");
+
+                    b.Property<string>("Nume")
+                        .IsRequired();
+
+                    b.Property<string>("NumeDelegat")
+                        .IsRequired();
+
+                    b.Property<string>("TelefonDelegat")
+                        .IsRequired();
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("ServiceInfoId");
+
+                    b.ToTable("ServiceInfos");
+                });
+
+            modelBuilder.Entity("Domain.Models.Services.ServiceLocation", b =>
+                {
+                    b.Property<int>("ServiceLocationId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address")
+                        .IsRequired();
+
+                    b.Property<int>("CityId");
+
+                    b.Property<decimal>("Latitude")
+                        .HasColumnType("decimal(18, 9)");
+
+                    b.Property<decimal>("Longitude")
+                        .HasColumnType("decimal(18, 9)");
+
+                    b.Property<int>("MaxCars");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<int>("ServiceInfoId");
+
+                    b.HasKey("ServiceLocationId");
+
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("ServiceInfoId");
+
+                    b.ToTable("ServiceLocations");
+                });
+
+            modelBuilder.Entity("Domain.Models.Services.ServiceLocationContact", b =>
+                {
+                    b.Property<int>("ServiceLocationContactId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ServiceLocationId");
+
+                    b.Property<int>("ContactTypeId");
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("ServiceLocationContactId", "ServiceLocationId", "ContactTypeId");
+
+                    b.HasAlternateKey("ServiceLocationContactId");
+
+                    b.HasIndex("ContactTypeId");
+
+                    b.HasIndex("ServiceLocationId");
+
+                    b.ToTable("ServiceLocationContacts");
+                });
+
+            modelBuilder.Entity("Domain.Models.Services.ServiceLocationFacility", b =>
+                {
+                    b.Property<int>("ServiceLocationFacilityId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ServiceLocationId");
+
+                    b.Property<int>("ServiceFacilityId");
+
+                    b.HasKey("ServiceLocationFacilityId", "ServiceLocationId", "ServiceFacilityId");
+
+                    b.HasAlternateKey("ServiceLocationFacilityId");
+
+                    b.HasIndex("ServiceFacilityId");
+
+                    b.HasIndex("ServiceLocationId");
+
+                    b.ToTable("ServiceLocationFacilities");
+                });
+
+            modelBuilder.Entity("Domain.Models.Services.ServiceLocationOperation", b =>
+                {
+                    b.Property<int>("ServiceLocationOperationId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ServiceLocationId");
+
+                    b.Property<int>("ServiceOperationId");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18, 9)");
+
+                    b.Property<int>("Time");
+
+                    b.HasKey("ServiceLocationOperationId", "ServiceLocationId", "ServiceOperationId");
+
+                    b.HasAlternateKey("ServiceLocationOperationId");
+
+                    b.HasIndex("ServiceLocationId");
+
+                    b.HasIndex("ServiceOperationId");
+
+                    b.ToTable("ServiceLocationOperations");
+                });
+
+            modelBuilder.Entity("Domain.Models.Services.ServiceLocationPhoto", b =>
+                {
+                    b.Property<int>("ServiceLocationPhotoId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Link");
+
+                    b.Property<int>("Position");
+
+                    b.Property<int>("ServiceLocationId");
+
+                    b.HasKey("ServiceLocationPhotoId");
+
+                    b.HasIndex("ServiceLocationId");
+
+                    b.ToTable("ServiceLocationPhotos");
+                });
+
+            modelBuilder.Entity("Domain.Models.Services.ServiceLocationReview", b =>
+                {
+                    b.Property<int>("ServiceLocationReviewId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateTime");
+
+                    b.Property<float>("Rate");
+
+                    b.Property<string>("Review");
+
+                    b.Property<int>("ServiceLocationId");
+
+                    b.Property<int>("UserEServiceId");
+
+                    b.HasKey("ServiceLocationReviewId");
+
+                    b.HasIndex("ServiceLocationId");
+
+                    b.ToTable("ServiceLocationReviews");
+                });
+
+            modelBuilder.Entity("Domain.Models.Services.ServiceManufacturer", b =>
+                {
+                    b.Property<int>("ServiceManufacturerId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ServiceLocationId");
+
+                    b.Property<int>("CarManufacturerId");
+
+                    b.HasKey("ServiceManufacturerId", "ServiceLocationId", "CarManufacturerId");
+
+                    b.HasAlternateKey("ServiceManufacturerId");
+
+                    b.HasIndex("CarManufacturerId");
+
+                    b.HasIndex("ServiceLocationId");
+
+                    b.ToTable("ServiceManufacturers");
+                });
+
+            modelBuilder.Entity("Domain.Models.Services.ServiceProgram", b =>
+                {
+                    b.Property<int>("ServiceProgramId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CloseHour");
+
+                    b.Property<int>("CloseMinute");
+
+                    b.Property<int>("OpenHour");
+
+                    b.Property<int>("OpenMinute");
+
+                    b.Property<int>("ServiceLocationId");
+
+                    b.Property<int>("WeekDay");
+
+                    b.HasKey("ServiceProgramId");
+
+                    b.HasIndex("ServiceLocationId");
+
+                    b.ToTable("ServicePrograms");
+                });
+
+            modelBuilder.Entity("Domain.Models.Services.ServicePromotion", b =>
+                {
+                    b.Property<int>("ServicePromotionId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Image");
+
+                    b.Property<int>("ServiceLocationId");
+
+                    b.HasKey("ServicePromotionId");
+
+                    b.HasIndex("ServiceLocationId");
+
+                    b.ToTable("ServicePromotions");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.Property<int>("Id")
@@ -136,11 +481,9 @@ namespace Domain.EF.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
+                    b.Property<string>("LoginProvider");
 
-                    b.Property<string>("ProviderKey")
-                        .HasMaxLength(128);
+                    b.Property<string>("ProviderKey");
 
                     b.Property<string>("ProviderDisplayName");
 
@@ -170,17 +513,119 @@ namespace Domain.EF.Migrations
                 {
                     b.Property<int>("UserId");
 
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
+                    b.Property<string>("LoginProvider");
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(128);
+                    b.Property<string>("Name");
 
                     b.Property<string>("Value");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Domain.Models.Nomenclatoare.ServiceOperation", b =>
+                {
+                    b.HasOne("Domain.Models.Nomenclatoare.ServiceOperationType", "ServiceOperationType")
+                        .WithMany("ServiceOperations")
+                        .HasForeignKey("ServiceOperationTypeId");
+                });
+
+            modelBuilder.Entity("Domain.Models.Services.ServiceLocation", b =>
+                {
+                    b.HasOne("Domain.Models.Nomenclatoare.City", "City")
+                        .WithMany("ServiceLocations")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Domain.Models.Services.ServiceInfo", "ServiceInfo")
+                        .WithMany("ServiceLocations")
+                        .HasForeignKey("ServiceInfoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Domain.Models.Services.ServiceLocationContact", b =>
+                {
+                    b.HasOne("Domain.Models.Nomenclatoare.ContactType", "ContactType")
+                        .WithMany("ServiceLocationContacts")
+                        .HasForeignKey("ContactTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Domain.Models.Services.ServiceLocation", "ServiceLocation")
+                        .WithMany("ServiceLocationContacts")
+                        .HasForeignKey("ServiceLocationId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Domain.Models.Services.ServiceLocationFacility", b =>
+                {
+                    b.HasOne("Domain.Models.Nomenclatoare.ServiceFacility", "ServiceFacility")
+                        .WithMany("ServiceLocationFacilities")
+                        .HasForeignKey("ServiceFacilityId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Domain.Models.Services.ServiceLocation", "ServiceLocation")
+                        .WithMany("ServiceLocationFacilities")
+                        .HasForeignKey("ServiceLocationId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Domain.Models.Services.ServiceLocationOperation", b =>
+                {
+                    b.HasOne("Domain.Models.Services.ServiceLocation", "ServiceLocation")
+                        .WithMany("ServiceLocationOperations")
+                        .HasForeignKey("ServiceLocationId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Domain.Models.Nomenclatoare.ServiceOperation", "ServiceOperation")
+                        .WithMany("ServiceLocationOperations")
+                        .HasForeignKey("ServiceOperationId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Domain.Models.Services.ServiceLocationPhoto", b =>
+                {
+                    b.HasOne("Domain.Models.Services.ServiceLocation", "ServiceLocation")
+                        .WithMany("ServiceLocationPhotos")
+                        .HasForeignKey("ServiceLocationId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Domain.Models.Services.ServiceLocationReview", b =>
+                {
+                    b.HasOne("Domain.Models.Services.ServiceLocation", "ServiceLocation")
+                        .WithMany("ServiceLocationReviews")
+                        .HasForeignKey("ServiceLocationId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Domain.Models.Services.ServiceManufacturer", b =>
+                {
+                    b.HasOne("Domain.Models.Nomenclatoare.CarManufacturer", "CarManufacturer")
+                        .WithMany("ServiceManufacturers")
+                        .HasForeignKey("CarManufacturerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Domain.Models.Services.ServiceLocation", "ServiceLocation")
+                        .WithMany("ServiceManufacturers")
+                        .HasForeignKey("ServiceLocationId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Domain.Models.Services.ServiceProgram", b =>
+                {
+                    b.HasOne("Domain.Models.Services.ServiceLocation", "ServiceLocation")
+                        .WithMany("ServicePrograms")
+                        .HasForeignKey("ServiceLocationId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Domain.Models.Services.ServicePromotion", b =>
+                {
+                    b.HasOne("Domain.Models.Services.ServiceLocation", "ServiceLocation")
+                        .WithMany("ServicePromotions")
+                        .HasForeignKey("ServiceLocationId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

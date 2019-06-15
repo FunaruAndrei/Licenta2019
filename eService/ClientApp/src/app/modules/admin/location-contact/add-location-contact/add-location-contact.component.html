@@ -1,0 +1,28 @@
+<h1 mat-dialog-title fxLayoutAlign="center center">
+  Adauga contact
+</h1>
+<div mat-dialog-content class="example-container" fxLayout="column">
+  <div class="input-row">
+    <mat-form-field fxFlex>
+      <mat-label>Alege tipul de contact</mat-label>
+      <mat-select [(value)]="data.contact.contactTypeId">
+        <mat-option *ngFor="let opt of data.types" [value]="opt.contactTypeId">
+          <i [ngClass]="opt.icon"></i> {{opt.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="input-row">
+    <mat-form-field fxFlex>
+      <input matInput placeholder="Valoare contact" [(ngModel)]="data.contact.value">
+    </mat-form-field>
+  </div>
+</div>
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-around center">
+  <button mat-button color="primary" [mat-dialog-close]="data" cdkFocusInitial>
+    <mat-icon>add</mat-icon> Adauga
+  </button>
+  <button mat-button color="warn" (click)="onNoClick()">
+    <mat-icon>close</mat-icon> Renunta
+  </button>
+</div>

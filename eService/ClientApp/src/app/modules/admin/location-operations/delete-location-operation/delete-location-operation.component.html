@@ -1,0 +1,14 @@
+<h1 mat-dialog-title fxLayoutAlign="center center">
+  Sterge serviciu
+</h1>
+<div mat-dialog-content fxLayoutAlign="center center">
+  <p class="text-center">Esti sigur ca vrei sa stergi serviciul  <b>{{data.op.name}}</b> <br/> <i>(Pret: {{data.item.price}} lei - Timp: {{data.item.time}} minute)</i>?</p>
+</div>
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-around center">
+  <button mat-button color="warn" [mat-dialog-close]="data" cdkFocusInitial>
+    <mat-icon>delete</mat-icon> Da
+  </button>
+  <button mat-button color="primary" (click)="onNoClick()">
+    <mat-icon>close</mat-icon> Nu
+  </button>
+</div>

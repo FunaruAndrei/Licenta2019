@@ -1,0 +1,102 @@
+
+.example-spacer {
+  flex: 1 1 auto;
+  .mat-form-field-wrapper{
+    font-size: 15px;
+  }
+}
+
+
+.services-wrapper {
+  background: #f2f3f6;
+  width: 100%;
+  height: 100%;
+}
+
+mat-toolbar {
+  position: sticky;
+  position: -webkit-sticky; /* For macOS/iOS Safari */
+  top: 0; /* Sets the sticky toolbar to be on top */
+  z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
+  min-height: 74px;
+  .mat-toolbar-row{
+    min-height: 74px;
+  }
+}
+
+.services-toolbar{
+  background-color: white;
+}
+
+.search-container{
+  background-color: white;
+  border-radius: 5px;
+  margin: 15px;
+  margin-top: 0px;
+  padding: 15px;
+  position: sticky;
+  top: 95px;
+  mat-form-field{
+    font-size: 13px;
+  }
+}
+
+.search-container-title{
+  position:relative;
+  padding: 10px 0;
+}
+
+.search-container-title::before {
+  content: "";
+  width: 40px;
+  height: 4px;
+  left: 0;
+  bottom: 0;
+  position: absolute;
+  background: -webkit-gradient(linear,left top,right top,from(#5d6fd3),to(#4a5dc4));
+  background: -webkit-linear-gradient(left,#5d6fd3,#4a5dc4);
+  background: -o-linear-gradient(left,#5d6fd3 0,#4a5dc4 100%);
+  background: linear-gradient(90deg,#5d6fd3 0,#4a5dc4);
+}
+
+.service-tile {
+  height: 250px;
+  background: white;
+  border-radius: 5px;
+  margin-bottom: 25px;
+
+  .service-tile-image {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+
+    img {
+      height: 100%;
+      border-bottom-left-radius: 5px;
+      border-top-left-radius: 5px;
+      position: absolute;
+    }
+
+    .service-tile-image-helper {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      color: white;
+      background: rgba(0,0,0, 0.5);
+    }
+  }
+
+  .service-tile-body {
+    padding: 10px;
+  }
+
+  .rating-number {
+    color: #5d6fd3;
+    font-weight: 550;
+  }
+}
+
+agm-map {
+  height: 100%;
+  min-height: 400px;
+}

@@ -1,0 +1,210 @@
+<div class="services-wrapper">
+  <div fxLayout="column" fxLayoutGap="25px">
+    <mat-toolbar class="services-toolbar mat-elevation-z5" color="" fxLayout="row">
+      <mat-toolbar-row class="admin-toolbar" fxLayout="row wrap" fxFlex="72" fxFlexOffset="14" fxLayoutGap="10px">
+
+        <img class="img-fluid" src="/images/Logo/Logo.jpg" style="height: inherit" alt="Logo" />
+
+        <div class="example-spacer" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+          <div fxFlex>
+            <mat-form-field class="w-100" style="font-size: 14px; margin-top: 15px;">
+              <input matInput placeholder="Oras" aria-label="Oras" [matAutocomplete]="auto" [formControl]="cityCtrl">
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="CitySelected($event.option.value)">
+                <mat-option *ngFor="let state of filteredCities | async" [value]="state">
+                  <span>{{state.name}}</span> |
+                  <small>Judet: {{state.judet}}</small>
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+          <div fxFlex>
+            <mat-form-field class="w-100" style="font-size: 14px; margin-top: 15px;">
+              <input matInput placeholder="Tip serviciu" aria-label="Tip serviciu" [matAutocomplete]="autoa" [formControl]="typeCtrl">
+              <mat-autocomplete #autoa="matAutocomplete" [displayWith]="displayFn" (optionSelected)="TypeSelected($event.option.value)">
+                <mat-option *ngFor="let type of filteredTypes | async" [value]="type">
+                  <img class="mr-3" aria-hidden [src]="'/images/Operations/' + type.icon" height="25">
+                  <span>{{type.name}}</span>
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+          <div fxFlex>
+            <mat-form-field class="w-100" style="font-size: 14px; margin-top: 15px;">
+              <input matInput placeholder="Brand masina" aria-label="Brand masina" [matAutocomplete]="autob" [formControl]="brandCtrl">
+              <mat-autocomplete #autob="matAutocomplete" [displayWith]="displayFn" (optionSelected)="BrandSelected($event.option.value)">
+                <mat-option *ngFor="let bd of filteredBrands | async" [value]="bd">
+                  <img class="mr-3" aria-hidden [src]="'/images/CarLogos/' + bd.icon" height="25">
+                  <span>{{bd.name}}</span>
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!--<button mat-button [matMenuTriggerFor]="menu">
+          Service-ul meu
+        </button>
+
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="GoToGeneralInfo()">
+            <i class="fas fa-info-circle"></i>
+            Informatii generale
+          </button>
+          <button mat-menu-item *ngFor="let item of locations" (click)="GoToLocation(item)">
+            <i class="fas fa-warehouse"></i> {{item.name}}
+          </button>
+          <button mat-menu-item [disabled]="!generalInfoCompleted" (click)="AddNewLocation()">
+            <i class="fas fa-plus"></i> Adauga locatie noua
+          </button>
+        </mat-menu>-->
+        <a mat-button href="/Identity/Account/LogoutAdmin">Sign out</a>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <div fxLayout="row" fxLayoutGap="15px">
+      <div fxFlex="15">
+        <div class="search-container mat-elevation-z3" fxLayout="column">
+          <div>
+            <h5 class="search-container-title">
+              Filtreaza
+            </h5>
+          </div>
+          <!--<div>
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Tip serviciu" aria-label="Tip serviciu" [matAutocomplete]="autoa" [formControl]="typeCtrl">
+              <mat-autocomplete #autoa="matAutocomplete" [displayWith]="displayFn" (optionSelected)="TypeSelected($event.option.value)">
+                <mat-option *ngFor="let type of filteredTypes | async" [value]="type">
+                  <img class="mr-3" aria-hidden [src]="'/images/Operations/' + type.icon" height="25">
+                  <span>{{type.name}}</span>
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>-->
+          <div>
+            <mat-form-field class="example-chip-list" fxFlex>
+              <mat-chip-list #chipListOp>
+                <mat-chip *ngFor="let op of selectedOperations"
+                          [selectable]="selectable"
+                          [removable]="removable"
+                          (removed)="removeOperation(op)">
+                  <span matTooltip="{{op.name}}"
+                        [matTooltipPosition]="'right'">
+                    {{ (op.name.length>6)? (op.name | slice:0:6)+'..':(op.name)}}
+                  </span>
+                  <mat-icon matChipRemove (click)="removeOperation(op)">cancel</mat-icon>
+                </mat-chip>
+                <input placeholder="Servicii..."
+                       #facilityInput
+                       [formControl]="operationCtrl"
+                       [matAutocomplete]="autoop"
+                       [matChipInputFor]="chipListOp"
+                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                       [matChipInputAddOnBlur]="addOnBlur">
+              </mat-chip-list>
+              <mat-autocomplete #autoop="matAutocomplete" (optionSelected)="selectedOperation($event.option.value)">
+                <mat-option *ngFor="let op of filteredOperations" [value]="op">
+                  <div matTooltip="{{op.name}}" [matTooltipPosition]="'right'">
+                    {{op.name}}
+                  </div>
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="example-chip-list" fxFlex>
+              <mat-chip-list #chipListFac>
+                <mat-chip *ngFor="let facility of selectedFacilities"
+                          [selectable]="selectable"
+                          [removable]="removable"
+                          (removed)="removeFacility(facility)">
+                  <span matTooltip="{{facility.name}}"><i [ngClass]="facility.icon"></i></span>
+                  <mat-icon matChipRemove (click)="removeFacility(facility)">cancel</mat-icon>
+                </mat-chip>
+                <input placeholder="Facilitati..."
+                       #facilityInput
+                       [formControl]="facilityCtrl"
+                       [matAutocomplete]="autofac"
+                       [matChipInputFor]="chipListFac"
+                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                       [matChipInputAddOnBlur]="addOnBlur">
+              </mat-chip-list>
+              <mat-autocomplete #autofac="matAutocomplete" (optionSelected)="selectedFacility($event.option.value)">
+                <mat-option *ngFor="let facility of facilities" [value]="facility">
+                  <i [ngClass]="facility.icon"></i>
+                  {{facility.name}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="w-100">
+              <mat-label>Distanta</mat-label>
+              <mat-select [(ngModel)]="selectedDistance">
+                <mat-option *ngFor="let dist of distances" [value]="dist">
+                  {{dist}} km
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div>
+            <button class="w-100" mat-button color="primary" (click)="GetServices()">
+              <mat-icon>search</mat-icon> Cauta
+            </button>
+            <button class="w-100" mat-button color="accent" (click)="showMap=!showMap">
+              <i class="fas fa-map"></i> Cauta pe harta
+            </button>
+          </div>
+        </div>
+      </div>
+      <div fxFlex="25" *ngIf="showMap">
+        <agm-map [latitude]="queryUrl.latitude" [longitude]="queryUrl.longitude" [zoom]="15">
+          <agm-marker *ngFor="let service of services" [latitude]="service.latitude" [longitude]="service.longitude">
+            <agm-snazzy-info-window [maxWidth]="100" [closeWhenOthersOpen]="true">
+              <ng-template>
+                My first Snazzy Info Window!
+              </ng-template>
+            </agm-snazzy-info-window>
+          </agm-marker>
+        </agm-map>
+      </div>
+      <div fxFlex="{{showMap==true ? 50 : 65}}" fxLayout="row wrap" fxLayoutGap="25px">
+        <div class="service-tile mat-elevation-z4" fxFlex="0 1 calc({{showMap==true ? '50%' : '33%'}}-25px)" *ngFor="let service of services" fxLayout="row">
+          <div class="service-tile-image" fxFlex="50" fxLayoutALign="center center">
+            <img [src]="GetSrcForService(service)" />
+            <div class="service-tile-image-helper text-center">
+              <i class="fas fa-camera"></i> {{service.noImages}} imagini
+            </div>
+          </div>
+          <div class="service-tile-body" fxFlex="50" fxLayout="column" fxLayoutGap="5px">
+            <div style="font-size: 16px;">
+              {{service.name}}
+            </div>
+            <div class="text-muted">
+              {{service.distance | number:'1.1-1'}} km, {{service.address}}
+            </div>
+            <div class="example-spacer"></div>
+            <div class="ml-2" fxLayoutAlign="start end">
+              <span class="rating-number mr-2">
+                <i class="fas fa-check"></i> {{service.reviewAvg}}
+              </span>
+              <bar-rating class="d-inline-block" [(rate)]="service.reviewAvg" [max]="5" [readOnly]="true"></bar-rating>
+            </div>
+            <div class="ml-2" fxLayoutAlign="start end">
+              <span class="rating-number mr-2">
+                <i class="fas fa-envelope"></i> {{service.comments}}
+              </span>
+              Comentarii
+            </div>
+            <div class="example-spacer"></div>
+            <div>
+              <a class="w-100" mat-raised-button color="primary"
+                 [routerLink]="['/service', service.locationId]">
+                Cititi mai multe
+              </a>
+            </div>
+          </div>
+        </div>
+     
+      </div>
+    </div>
+  </div>
+</div>

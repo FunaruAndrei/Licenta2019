@@ -1,0 +1,92 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Program locatie</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="p-3">
+    <div fxLayout="column">
+      
+      <div fxLayout="row">
+        <mat-form-field fxFlex>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+        <div fxFlex="2 2 calc(10em + 10px)"></div>
+      </div>
+
+      <div fxFlex fxLayout="column" class="mat-elevation-z8">
+        <table fxFlex mat-table [dataSource]="dataSource" matSort>
+
+          <ng-container matColumnDef="dayName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Zi </mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element"> {{element.dayName}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="open">
+            <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Deschidere </mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element">
+              <mat-form-field *ngIf="element!=editItem">
+                <input matInput [ngxTimepicker]="toggleTimepicker" [format]="24" [value]="element.open" [disabled]="true">
+                <ngx-material-timepicker-toggle matSuffix [for]="toggleTimepicker"></ngx-material-timepicker-toggle>
+                <ngx-material-timepicker [enableKeyboardInput]="true" #toggleTimepicker></ngx-material-timepicker>
+              </mat-form-field>
+              <mat-form-field *ngIf="element==editItem">
+                <input id="editItemOpen" matInput [ngxTimepicker]="toggleTimepicker" [format]="24" [(ngModel)]="editItem.open" [value]="editItem.open">
+                <ngx-material-timepicker-toggle matSuffix [for]="toggleTimepicker"></ngx-material-timepicker-toggle>
+                <ngx-material-timepicker [enableKeyboardInput]="true" #toggleTimepicker></ngx-material-timepicker>
+              </mat-form-field>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="close">
+            <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Inchidere </mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element">
+              <mat-form-field *ngIf="element!=editItem">
+                <input matInput [ngxTimepicker]="toggleTimepickerEnd" [format]="24" [value]="element.close" [disabled]="true">
+                <ngx-material-timepicker-toggle matSuffix [for]="toggleTimepickerEnd"></ngx-material-timepicker-toggle>
+                <ngx-material-timepicker [enableKeyboardInput]="true" #toggleTimepickerEnd></ngx-material-timepicker>
+              </mat-form-field>
+              <mat-form-field *ngIf="element==editItem">
+                <input matInput [ngxTimepicker]="toggleTimepickerEnd" [format]="24" [(ngModel)]="editItem.close" [value]="editItem.close">
+                <ngx-material-timepicker-toggle matSuffix [for]="toggleTimepickerEnd"></ngx-material-timepicker-toggle>
+                <ngx-material-timepicker [enableKeyboardInput]="true" #toggleTimepickerEnd></ngx-material-timepicker>
+              </mat-form-field>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <mat-header-cell mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element" fxLayoutAlign="end center">
+            
+              <div *ngIf="element==editItem">
+                <button mat-button color="accent" (click)="ConfirmAddEdit(element)">
+                  <mat-icon>check</mat-icon> Salveaza
+                </button>
+                <button mat-button color="warn" (click)="CloseEdit(element)">
+                  <mat-icon>close</mat-icon> Renunta
+                </button>
+              </div>
+              <div *ngIf="element!=editItem">
+                <button mat-button color="accent" *ngIf="element.locProgId == 0" (click)="AddProgram(element)">
+                  <mat-icon>add</mat-icon> Adauga
+                </button>
+                <button mat-button color="primary" *ngIf="element.locProgId != 0" (click)="EditProgram(element)">
+                  <mat-icon>edit</mat-icon> Editeaza
+                </button>
+                <button mat-button color="warn" *ngIf="element.locProgId != 0" (click)="DeleteProgram(element)">
+                  <mat-icon>delete</mat-icon> Sterge
+                </button>
+              </div>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+
+        </table>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-button color="primary">Salveaza</button>
+  </mat-card-actions>
+</mat-card>

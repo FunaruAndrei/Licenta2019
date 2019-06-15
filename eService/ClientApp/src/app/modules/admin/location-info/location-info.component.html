@@ -1,0 +1,69 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Informatii generale locatie</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="p-3">
+    <div fxLayout="column" fxLayoutGap="10px">
+      <div fxFlex fxLayout="row" fxLayoutGap="20px">
+        <div fxFlex="50">
+          <mat-form-field fxFlex>
+            <input matInput placeholder="Nume locatie" [(ngModel)]="info.name" (ngModelChange)="info.name = $event">
+          </mat-form-field>
+        </div>
+        <div fxFlex="50">
+          <mat-form-field fxFlex>
+            <input matInput placeholder="Oras" aria-label="Oras" [(ngModel)]="info.city" [matAutocomplete]="auto" [formControl]="cityCtrl">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="CitySelected($event.option.value)">
+              <mat-option *ngFor="let state of filteredCities | async" [value]="state">
+                <span>{{state.name}}</span> |
+                <small>Judet: {{state.judet}}</small> 
+              </mat-option>
+            </mat-autocomplete>
+
+            <!--<input type="text" placeholder="Oras" aria-label="Oras" matInput [formControl]="myControl" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let oras of citiesShown" [value]="info.city.name">
+                {{oras.name}}
+              </mat-option>
+            </mat-autocomplete>-->
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxFlex>
+        <mat-form-field fxFlex>
+          <textarea rows="1" matInput placeholder="Adresa" [(ngModel)]="info.address"></textarea>
+        </mat-form-field>
+      </div>
+      <div fxFlex fxLayout="row" fxLayoutGap="20px">
+        <mat-form-field fxFlex="33">
+          <input matInput type="number" placeholder="Numar maxim de masini" [(ngModel)]="info.maxCars">
+        </mat-form-field>
+        <div fxFlex fxLayout="row" fxLayoutGap="20px">
+          <div fxFlex="45">
+            <mat-form-field fxFlex>
+              <input matInput type="number" placeholder="Longitudine" [(ngModel)]="info.longitude">
+            </mat-form-field>
+          </div>
+          <div fxFlex="45">
+            <mat-form-field fxFlex>
+              <input matInput type="number" placeholder="Latitudine" [(ngModel)]="info.latitude">
+            </mat-form-field>
+          </div>
+          <div fxFlex>
+            <button mat-button
+                    (click)="SelectLocationCoords()"
+                    matTooltip="Alege coordonatele pe mapa!">
+              <i class="fas fa-map"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+   
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-button color="primary" (click)="SaveData()">Salveaza</button>
+  </mat-card-actions>
+</mat-card>

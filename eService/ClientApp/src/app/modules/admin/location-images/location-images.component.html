@@ -1,0 +1,47 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Imagini service</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="p-3" fxLayout="column">
+    <div fxFlex>
+      <div fxLayout="row">
+        <!--<mat-form-field fxFlex>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>-->
+        <div fxFlex="2 2 calc(10em + 10px)"></div>
+        <div fxFlex fxLayoutAlign="end center">
+          <button mat-button color="accent" (click)="file.click()">
+            <mat-icon>add</mat-icon> Adauga
+          </button>
+        </div>
+      </div>
+    </div>
+   
+    <div fxFlex fxLayout="row wrap" fxLayoutGap="20px;">
+      <div class="img-flex" fxFlex="calc(25% - 20px)"  *ngFor="let photo of photos" fxLayoutAlign="center start">
+        <img [src]="GetSrc(photo)"/>
+        <div class="overlay-picture"></div>
+        <button type="button" mat-mini-fab [matMenuTriggerFor]="menu" color="">
+          <i class="fas fa-plus"></i>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="DeleteImage(photo)">
+            <i class="fas fa-trash"></i> Sterge imagine
+          </button>
+          <button mat-menu-item (click)="OpenImage(photo)">
+            <i class="fas fa-image"></i> Vizualizeaza imagine
+          </button>
+          <!--<button mat-menu-item (click)="OpenImage(photo)">
+            <i class="fas fa-arrow-down"></i> Muta la dreapta
+          </button>
+          <button mat-menu-item (click)="OpenImage(photo)">
+            <i class="fas fa-arrow-up"></i> Muta la stanga
+          </button>-->
+        </mat-menu>
+      </div>
+    
+    </div>
+  </mat-card-content>
+ 
+</mat-card>
+<input type="file" [style.visibility]="'hidden'" multiple="true" #file capture="camera" accept="image/*" (change)="displayPhoto(file.files)" />

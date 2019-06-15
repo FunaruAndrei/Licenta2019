@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eService", "eService\eService.csproj", "{2EDE07A2-76E6-46AF-9256-DDD367321755}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eService", "eService\eService.csproj", "{2EDE07A2-76E6-46AF-9256-DDD367321755}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{507CBB60-9D5C-4FB8-A6D1-E62821D068FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{507CBB60-9D5C-4FB8-A6D1-E62821D068FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.EF", "Domain.EF\Domain.EF.csproj", "{937229AC-9F05-4015-A8A1-7BD921AD79C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.EF", "Domain.EF\Domain.EF.csproj", "{937229AC-9F05-4015-A8A1-7BD921AD79C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{905EA274-CC07-4BB3-8A14-55665785230D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{905EA274-CC07-4BB3-8A14-55665785230D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Implementations", "Services.Implementations\Services.Implementations.csproj", "{BE145B39-B10F-401D-8831-20AD1BD70AF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.Implementations", "Services.Implementations\Services.Implementations.csproj", "{BE145B39-B10F-401D-8831-20AD1BD70AF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Azure", "Domain.Azure\Domain.Azure.csproj", "{CC03A19A-3EE7-4CE6-A19F-5405A3A62872}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{BE145B39-B10F-401D-8831-20AD1BD70AF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE145B39-B10F-401D-8831-20AD1BD70AF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE145B39-B10F-401D-8831-20AD1BD70AF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC03A19A-3EE7-4CE6-A19F-5405A3A62872}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC03A19A-3EE7-4CE6-A19F-5405A3A62872}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC03A19A-3EE7-4CE6-A19F-5405A3A62872}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC03A19A-3EE7-4CE6-A19F-5405A3A62872}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

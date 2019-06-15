@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>
+  Logo {{data.service}}
+  <button class="float-right" mat-mini-fab (click)="CloseDialog()">
+    <i class="fas fa-times"></i>
+  </button>
+</h1>
+<div mat-dialog-content>
+ <img [src]="logo" alt="LogoImage"/>
+</div>

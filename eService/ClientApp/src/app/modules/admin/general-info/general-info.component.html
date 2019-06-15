@@ -1,0 +1,80 @@
+<div fxFlex fxFlex="66" fxFlexOffset="15">
+  <mat-card class="p-0">
+    <mat-card-header class="p-3">
+      <mat-card-title>Informatii generale service</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="p-3">
+      <form [formGroup]="genInfoForm" (ngSubmit)="AddUpdateGeneralInfo()" novalidate>
+        <div fxLayout="column" fxLayoutGap="20px">
+          <div fxFlex fxLayout="row" fxLayoutAlign="center center">
+            <div fxFlex="25" fxLayoutAlign="center center" fxLayout="row">
+              <div class="image-container">
+                <img class="rounded-circle" [src]="info.logo" alt="Photo" />
+                <div class="rounded-circle overlay-picture"></div>
+                <button type="button" mat-mini-fab [matMenuTriggerFor]="menu" color="">
+                  <i class="fas fa-plus"></i>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item (click)="file.click()">
+                    <i class="fas fa-plus"></i> Adauga/Schimba logo
+                  </button>
+                  <button mat-menu-item (click)="OpenLogoViewer()">
+                    <i class="fas fa-image"></i> Vizualizeaza logo
+                  </button>
+                </mat-menu>
+              </div>
+
+            </div>
+            <div fxFlex fxLayout="column">
+              <div>
+                <mat-form-field class="w-100">
+                  <input matInput #message maxlength="256" [style.fontSize]="'20px'" placeholder="Nume service" formControlName="name">
+                  <mat-error *ngIf="genInfoForm.controls['name'].invalid && (genInfoForm.controls['name'].dirty || genInfoForm.controls['name'].touched)">
+                    <div *ngIf="genInfoForm.controls['name'].errors.required">
+                      Numele service-ului este <strong>obligatoriu</strong>
+                    </div>
+                  </mat-error>
+                  <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+          <div fxFlex fxLayout="column">
+            <div fxFlex>
+              <mat-form-field fxFlex>
+                <textarea rows="3" matInput placeholder="Descriere" formControlName="descriere"></textarea>
+              </mat-form-field>
+            </div>
+            <mat-form-field fxFlex>
+              <input matInput placeholder="Adresa" formControlName="adresaSediuSocial">
+            </mat-form-field>
+            <div fxFlex fxLayout="row" fxLayoutGap="10px">
+              <mat-form-field fxFlex>
+                <input matInput placeholder="Nume persoana contact" formControlName="numeDelegat">
+              </mat-form-field>
+              <mat-form-field fxFlex>
+                <input matInput placeholder="Telefon persoana contact" formControlName="telefonDelegat">
+              </mat-form-field>
+              <mat-form-field fxFlex>
+                <input matInput placeholder="Email persoana contact" formControlName="email">
+                <mat-error *ngIf="genInfoForm.controls['email'].invalid && (genInfoForm.controls['email'].dirty || genInfoForm.controls['name'].touched)">
+                  <div *ngIf="genInfoForm.controls['email'].errors.email">
+                    Adresa email <strong>invalida</strong>
+                  </div>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div fxFlex fxFlexAlign="end">
+
+              <button mat-button color="primary" type="submit" cdkFocusInitial>
+                <mat-icon>save</mat-icon> Salveaza
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+<input type="file" [style.visibility]="'hidden'" #file capture="camera" accept="image/*" (change)="displayPhoto(file.files)" />

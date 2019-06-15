@@ -1,0 +1,49 @@
+<h1 mat-dialog-title fxLayoutAlign="center center">
+  Adauga serviciu
+</h1>
+<div mat-dialog-content class="example-container" fxLayout="column">
+  <div class="input-row">
+    <mat-form-field fxFlex>
+      <input matInput placeholder="Tip serviciu" aria-label="Tip serviciu" [matAutocomplete]="auto" [(ngModel)]="selectedOpType"
+             [formControl]="typeOpControl"
+             [disabled]="data.type=='edit'">
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="OnTypeSelected($event.option.value)" [displayWith] = "displayFnType">
+        <mat-option *ngFor="let type of filteredOptionsOpType | async" [value]="type">
+          <img class="mr-3" aria-hidden [src]="'/images/Operations/' + type.icon" height="25">
+          <span>{{type.name}}</span>
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+
+  <div class="input-row">
+    <mat-form-field fxFlex>
+      <input matInput placeholder="Serviciu" aria-label="Serviciu" [matAutocomplete]="autoa" [(ngModel)]="selectedOp"
+             [formControl]="opControl"
+             [disabled]="data.type=='edit'">
+      <mat-autocomplete #autoa="matAutocomplete" (optionSelected)="OnOperationSelected($event.option.value)" [displayWith] = "displayFnType">
+        <mat-option *ngFor="let op of filteredOptionsOp | async" [value]="op">
+          <span>{{op.name}}</span>
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+  <div class="input-row">
+    <mat-form-field fxFlex>
+      <input matInput placeholder="Timp (minute)" [(ngModel)]="data.item.time">
+    </mat-form-field>
+  </div>
+  <div class="input-row">
+    <mat-form-field fxFlex>
+      <input matInput placeholder="Pret (Lei)" [(ngModel)]="data.item.price">
+    </mat-form-field>
+  </div>
+</div>
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-around center">
+  <button mat-button color="primary" [mat-dialog-close]="data" cdkFocusInitial>
+    <mat-icon>check</mat-icon> Salveaza
+  </button>
+  <button mat-button color="warn" (click)="onNoClick()">
+    <mat-icon>close</mat-icon> Renunta
+  </button>
+</div>

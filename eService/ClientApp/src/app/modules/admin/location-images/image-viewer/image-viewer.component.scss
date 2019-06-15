@@ -1,0 +1,15 @@
+img{
+  max-width:100%;
+  max-height:100%;
+}
+
+.image-viewer-container{
+  height: 75vh;
+  width: 80vw;
+ 
+}
+
+.arrow-wrapper:hover .arrow-wrapper{
+  color: darkblue;
+  cursor:pointer;
+}

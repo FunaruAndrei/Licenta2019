@@ -23,8 +23,10 @@ namespace eService.Areas.Identity.Pages.Account
             _logger = logger;
         }
 
-        public void OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Admin");
         }
 
         public async Task<IActionResult> OnPost(string returnUrl = null)
