@@ -55,7 +55,7 @@ namespace eService.Controllers.Api
 
                 return Json(await _locationPhotoService.AddPhotosAsync(files, locationId));
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 return Json(new List<ServiceLocationPhotoViewModel>());
             }

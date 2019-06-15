@@ -22,12 +22,7 @@ namespace Domain.EF.Context
             this._userManager = userManager;
             this._roleManager = roleManager;
         }
-        
-
-        public async Task Seed()
-        {
-           
-        }
+   
 
 
     }
