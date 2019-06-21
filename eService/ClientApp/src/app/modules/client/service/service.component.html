@@ -78,16 +78,60 @@
       <div fxFlex="20">
 
       </div>
-      <div fxFlex="60" fxLayout="row" fxLayoutAlign="center center">
-        <div fxFlex fxLayoutAlign="start center">
-          <div class="basic-info-container" fxLayout="column">
+      <div fxFlex="60" fxLayout="row">
+        <div fxFlex="30" fxLayoutAlign="start center">
+          <div class="basic-info-container" fxLayout="column" fxLayoutAlign="space-around">
             <div class="basic-info-logo" fxLayoutAlign="center center">
               <img [src]="GetLogoSrc()"/>
+            </div>
+            <div class="p-2">
+              <button fxFlex mat-raised-button color="primary" (click)="RegisterAppointment()">
+                <span style="font-size: 16px;">Inregistrati o programare</span>
+              </button>
+            </div>
+            <div class="p-2" fxLayout="column" fxLayoutAlign="space-around" fxLayoutGap="10px">
+              <button fxFlex mat-stroked-button color="primary" *ngIf="!showPhone" (click)="TogglePhone()">
+                <span>Afisati numarul de telefon</span>
+              </button>
+
+              <button fxFlex mat-stroked-button color="primary" *ngIf="showPhone" (click)="CopyToClipboard()">
+                <span>{{GetPhoneNumber()}}</span>
+              </button>
+
+              <button fxFlex mat-stroked-button color="primary">
+                <span>Afisati adresa</span>
+              </button>
+            </div>
+          </div>
+        
+        </div>
+        <div fxFlex="70" class="basic-info-nav-container">
+          <div class="basic-info-navigate" fxLayout="row" fxLayoutAlign="space-around center">
+            <div fxFlex>
+              <button mat-button class="w-100">aaa</button>
+            </div>
+            <div fxFlex>
+              <button mat-button class="w-100">bbb</button>
             </div>
           </div>
         </div>
       </div>
       <div fxFlex="20">
+      </div>
+    </section>
+    <section class="name-section">
+      <div fxFlex="20">
+
+      </div>
+      <div fxFlex="60" class="name-section-body">
+        <div fxLayout="row" fxLayoutGap="15px">
+          <div fxFlex="60">
+            <h1 id="service-name">{{details.serviceInfo.nume}}</h1>
+          </div>
+        </div>
+      </div>
+      <div fxFlex="20">
+
       </div>
     </section>
     <!--<section class="service-categories after-counter" fxLayout="row">

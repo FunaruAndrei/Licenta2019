@@ -46,6 +46,8 @@ export class SearchPageComponent implements OnInit, OnChanges {
   brandCtrl = new FormControl();
   filteredBrands: Observable<CarManufacturer[]>;
 
+  selectedCity: City = null;
+
   constructor(private nomenclatoareService: NomenclatoareService,
     private searchPageService: SearchPageService,
     private auth: AuthService,
@@ -61,6 +63,14 @@ export class SearchPageComponent implements OnInit, OnChanges {
         this.longitude = e.coords.longitude;
         this.latitude = e.coords.latitude;
 
+        this.selectedCity = {
+          cityId: -1,
+          judet: "Locatie actuala",
+          name: "Locatie actuala",
+          judetAuto: "",
+          latitude: e.coords.latitude,
+          longitude: e.coords.longitude
+        };
         
         
       });
@@ -76,7 +86,7 @@ export class SearchPageComponent implements OnInit, OnChanges {
 
     this.filteredCities = this.cityCtrl.valueChanges
       .pipe(
-        filter((query: string) => query && query.length > 2),
+        filter((query: string) => query && query.length > 1),
       map(state => state ? this._filter(state) : this.cities.slice())
     );
     
@@ -107,7 +117,7 @@ export class SearchPageComponent implements OnInit, OnChanges {
     }
 
 
-    this.router.navigate(["/services"], { queryParams: x });
+    this.router.navigate(["client/services"], { queryParams: x });
   }
 
   ngOnChanges() {
@@ -171,10 +181,10 @@ export class SearchPageComponent implements OnInit, OnChanges {
 
       this.cities = e;
 
-      let x = this.cities.filter(z => z.latitude == (Math.round(this.latitude * 100) / 100) && z.longitude == (Math.round(this.longitude * 100) / 100) )[0];
 
-      if (x) {
-        this.cityCtrl.setValue(x);
+      if (this.selectedCity) {
+        this.cityCtrl.setValue(this.selectedCity);
+        this.cities.unshift(this.selectedCity);
       }
 
       this.judete = e.filter(z => z.name.indexOf(z.judet) >= 0);

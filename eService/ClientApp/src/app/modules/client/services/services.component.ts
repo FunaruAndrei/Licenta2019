@@ -94,6 +94,27 @@ export class ServicesComponent implements OnInit {
         this.queryUrl.brand = orderObj.brand;
       }
 
+      if (window.navigator.geolocation) {
+        let x;
+        window.navigator.geolocation.getCurrentPosition(e => {
+          let m: City = {
+            cityId: -1,
+            judet: "Locatie actuala",
+            name: "Locatie actuala",
+            judetAuto: "",
+            latitude: e.coords.latitude,
+            longitude: e.coords.longitude
+          };
+          
+          if (this.queryUrl.latitude == e.coords.latitude && this.queryUrl.longitude == e.coords.longitude) {
+            this.selectedCity = m;
+            this.cityCtrl.setValue(this.selectedCity);
+          }
+
+        });
+      }
+
+
       this.GetServices();
         
     });
@@ -197,9 +218,10 @@ export class ServicesComponent implements OnInit {
 
         if (this.queryUrl.latitude && this.queryUrl.longitude) {
 
-          this.selectedCity = this.cities.filter(z => z.longitude == this.queryUrl.longitude && z.latitude == this.queryUrl.latitude)[0];
-          this.cityCtrl.setValue(this.selectedCity);
-
+          if (!this.selectedCity) {
+            this.selectedCity = this.cities.filter(z => z.longitude == this.queryUrl.longitude && z.latitude == this.queryUrl.latitude)[0];
+            this.cityCtrl.setValue(this.selectedCity);
+          }
         }
 
         this.filteredCities = this.cityCtrl.valueChanges

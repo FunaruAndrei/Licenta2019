@@ -94,6 +94,22 @@
 .basic-info {
   position: relative;
 
+  .basic-info-nav-container {
+    position:relative;
+    .basic-info-navigate {
+      padding: 0 10px;
+      position: absolute;
+      width: 100%;
+      height: 50px;
+      top: -25px;
+      background-color: white;
+      z-index: 3;
+      border-radius: 15px;
+    }
+  }
+
+
+
   .basic-info-container {
     position: absolute;
     width: 250px;
@@ -103,9 +119,9 @@
     z-index: 3;
     border-radius: 10px;
 
-    .basic-info-logo{
-      img{
-        max-width:100%;
+    .basic-info-logo {
+      img {
+        max-width: 100%;
         border-radius: 5px;
       }
     }
@@ -157,5 +173,30 @@
       border-top: 40px solid transparent;
       border-bottom: 0 solid transparent;
     }
+  }
+}
+
+.name-section {
+  margin-top: 40px;
+
+  .name-section-body {
+    margin-left: 275px;
+  }
+
+  #service-name{
+    position:relative;
+    padding-bottom: 20px;
+  }
+  #service-name::before {
+    content: "";
+    width: 80px;
+    height: 4px;
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    background: -webkit-gradient(linear,left top,right top,from(#5d6fd3),to(#4a5dc4));
+    background: -webkit-linear-gradient(left,#5d6fd3,#4a5dc4);
+    background: -o-linear-gradient(left,#5d6fd3 0,#4a5dc4 100%);
+    background: linear-gradient(90deg,#5d6fd3 0,#4a5dc4);
   }
 }

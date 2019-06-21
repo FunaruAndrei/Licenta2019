@@ -16,28 +16,25 @@ import { ClientLayoutComponent } from './client-layout/client-layout.component';
 import { SearchPageComponent } from './search-page/search-page.component';
 import { ServicesComponent } from './services/services.component';
 import { BarRatingModule } from 'ngx-bar-rating';
+import { ClipboardModule } from 'ngx-clipboard';
 import { ServiceComponent } from './service/service.component';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
+import { AppointmentComponent } from './service/appointment/appointment.component';
 
 @NgModule({
-  declarations: [ClientLayoutComponent, SearchPageComponent, ServicesComponent, ServiceComponent],
+  declarations: [ClientLayoutComponent, SearchPageComponent,
+                 ServicesComponent, ServiceComponent, AppointmentComponent],
   imports: [
-    CommonModule,
-    ClientRoutingModule,
-    FlexLayoutModule,
-    DemoMaterialModule,
-    FormsModule,
-    ReactiveFormsModule,
-    Ng2IziToastModule,
-    CoreModule,
-    HttpClientModule,
-    ScrollToModule.forRoot(),
+    CommonModule, ClientRoutingModule,
+    FlexLayoutModule,  DemoMaterialModule,
+    FormsModule,  ReactiveFormsModule,
+    Ng2IziToastModule, CoreModule,
+    HttpClientModule,  ScrollToModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAU2yqZKf_fmbeMaRMzFUpkJf_ofXmX9Eg'
-    }),
-    NgxMaterialTimepickerModule,
-    BarRatingModule,
-    AgmSnazzyInfoWindowModule
+    }),  NgxMaterialTimepickerModule,
+    BarRatingModule, AgmSnazzyInfoWindowModule,
+    ClipboardModule
   ],
   providers: [
     {
@@ -46,6 +43,9 @@ import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
     {
       provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS
     }
+  ],
+  entryComponents: [
+    AppointmentComponent
   ]
 })
 export class ClientModule { }

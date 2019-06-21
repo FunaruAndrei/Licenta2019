@@ -20,8 +20,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { LoaderComponent } from './core/loader/loader.component';
-import { AdminModule } from './modules/admin/admin.module';
-import { ClientModule } from './modules/client/client.module';
 
 
 @NgModule({
@@ -30,8 +28,6 @@ import { ClientModule } from './modules/client/client.module';
   ],
   imports: [
     BrowserModule,
-    AdminModule,
-    ClientModule,
     HttpClientModule,
     DemoMaterialModule,
     BrowserAnimationsModule,
