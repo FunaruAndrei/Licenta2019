@@ -1,3 +1,152 @@
-<p>
-  appointment works!
-</p>
+<div mat-dialog-title fxLayout="row" style="margin-bottom: 0;">
+  <div fxFlex="20">
+    <img [src]="GetLogoSrc()" height="50" />
+  </div>
+  <div fxFlex="60" fxLayoutAlign="center center">
+    Inregistrare programare - {{data.details.serviceInfo.nume}}
+  </div>
+  <div fxFlex="20">
+    <button class="float-right" mat-mini-fab (click)="CloseDialog()">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+</div>
+<div mat-dialog-content fxLayout="column" class="appointment-body">
+  
+  <div fxLayout="column" style="padding: 15px;" fxLayoutGap="15px">
+    <div fxFlex>
+      <h4 class="header-apointment">
+        <i class="fas fa-car" style="color: #4a5dc4"></i>
+        Date despre masina
+      </h4>
+    </div>
+    <div fxFlex fxLayout="row" fxLayoutGap="25px">
+      <div fxFlex>
+        <mat-form-field fxFlex>
+          <input type="text" placeholder="Anul" aria-label="Number" matInput [formControl]="yearFormControl" [matAutocomplete]="autoYear" [(ngModel)]="addAppointment.carYear">
+          <mat-autocomplete #autoYear="matAutocomplete">
+            <mat-option *ngFor="let option of filteredYears | async" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+      <div fxFlex>
+        <mat-form-field fxFlex>
+          <input matInput placeholder="Brand masina" aria-label="Brand masina" [matAutocomplete]="autob" [formControl]="brandCtrl">
+          <mat-autocomplete #autob="matAutocomplete" [displayWith]="displayFnType" (optionSelected)="BrandSelected($event.option.value)">
+            <mat-option *ngFor="let bd of filteredBrands | async" [value]="bd">
+              <img class="mr-3" aria-hidden [src]="'/images/CarLogos/' + bd.icon" height="25">
+              <span>{{bd.name}}</span>
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+      <div fxFlex>
+        <mat-form-field fxFlex>
+          <input type="text" name="model-masina" matInput [(ngModel)]="addAppointment.carModel" placeholder="Model masina">
+        </mat-form-field>
+      </div>
+    </div>
+    <div>
+      <h4 class="header-apointment">
+        <i class="fas fa-calendar" style="color: #4a5dc4"></i>
+        Alege timpul potrivit
+      </h4>
+    </div>
+    <div fxFlex fxLayout="row" fxLayoutGap="25px">
+      <div fxFlex>
+        <mat-form-field fxFlex>
+          <mat-label>Luna</mat-label>
+          <mat-select [(value)]="selectedMonth" (selectionChange)="SelectMonth($event.value)">
+            <mat-option *ngFor="let mth of months" [value]="mth">
+              {{mth}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxFlex>
+        <mat-form-field fxFlex>
+          <mat-label>Ziua</mat-label>
+          <mat-select [(value)]="selectedDay" (selectionChange)="SelectDay($event.value)">
+            <mat-option *ngFor="let day of days" [value]="day">
+              {{day}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxFlex>
+        <mat-form-field fxFlex>
+          <mat-label>Ora</mat-label>
+          <mat-select [(value)]="selectedHour">
+            <mat-option *ngFor="let hr of hours" [value]="hr">
+              {{hr}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div>
+      <h4 class="header-apointment">
+        <i class="fas fa-tools" style="color: #4a5dc4"></i>
+        Alege serviciul dorit
+      </h4>
+    </div>
+    <div fxFlex fxLayout="row" fxLayoutGap="25px">
+
+      <div fxFlex>
+        <mat-form-field fxFlex>
+          <input matInput placeholder="Tip serviciu" aria-label="Tip serviciu" [matAutocomplete]="autoTipS" [(ngModel)]="selectedOpType"
+                 [formControl]="typeOpControl"
+                 [disabled]="data.type=='edit'">
+          <mat-autocomplete #autoTipS="matAutocomplete" (optionSelected)="OnTypeSelected($event.option.value)" [displayWith] = "displayFnType">
+            <mat-option *ngFor="let type of filteredOptionsOpType | async" [value]="type">
+              <img class="mr-3" aria-hidden [src]="'/images/Operations/' + type.icon" height="25">
+              <span>{{type.name}}</span>
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+      <div fxFlex>
+        <mat-form-field fxFlex>
+          <input matInput placeholder="Serviciu" aria-label="Serviciu" [matAutocomplete]="autoServiciu" 
+                 [formControl]="opControl"
+                 [disabled]="data.type=='edit'">
+          <mat-autocomplete #autoServiciu="matAutocomplete" (optionSelected)="OnOperationSelected($event.option.value)" [displayWith] = "displayFn">
+            <mat-option *ngFor="let op of filteredOptionsOp | async" [value]="op">
+              <span>{{op.description.name}}</span>
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+      <div fxFlex>
+
+      </div>
+    </div>
+    <div>
+      <h4 class="header-apointment">
+        <i class="fas fa-phone" style="color: #4a5dc4"></i>
+        Date de contact
+      </h4>
+    </div>
+    <div fxFlex fxLayout="row" fxLayoutGap="25px">
+
+      <div fxFlex>
+        <mat-form-field fxFlex>
+          <input type="text" name="numar-telefon" matInput [(ngModel)]="addAppointment.phone" placeholder="Numar de telefon">
+        </mat-form-field>
+      </div>
+      <div fxFlex>
+        <mat-form-field fxFlex>
+          <input type="email" name="email" matInput [(ngModel)]="addAppointment.email" placeholder="Email">
+        </mat-form-field>
+      </div>
+      <div fxFlex></div>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="end center" (click)="AddAppointment()">
+  <button mat-button color="primary">
+    <i class="fas fa-plus"></i> Salveaza
+  </button>
+</div>

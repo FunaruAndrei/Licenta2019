@@ -3,15 +3,27 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Domain.EF.Models.Identity;
 using Microsoft.AspNetCore.Mvc;
 using eService.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace eService.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly SignInManager<EServiceUser> _signInManager;
+
+        public HomeController(SignInManager<EServiceUser> signInManager)
         {
+            _signInManager = signInManager;
+        }
+        public async Task<IActionResult> Index()
+        {
+            if (User.IsInRole("Admin"))
+            {
+               await _signInManager.SignOutAsync();
+            }
             return View();
         }
 

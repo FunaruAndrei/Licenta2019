@@ -40,13 +40,14 @@ namespace eService
                
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
+                
             });
 
             services.AddDbContext<EServiceDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection"),
                     sqlServerOptions => sqlServerOptions.MigrationsAssembly("Domain.EF")));
-            services.AddIdentity<EServiceUser, EServiceRole>()
+            services.AddIdentity<EServiceUser, EServiceRole>(options => { options.User.AllowedUserNameCharacters = String.Empty; options.User.RequireUniqueEmail = true; })
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<EServiceDbContext>()
                 .AddDefaultTokenProviders();

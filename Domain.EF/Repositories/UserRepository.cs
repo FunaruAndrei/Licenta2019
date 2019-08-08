@@ -17,7 +17,11 @@ namespace Domain.EF.Repositories
             _userManager = userManager;
             _mapper = mapper;
         }
-      
+
+        public async Task<UserEService> GetByIdAsync(int id)
+        {
+            return _mapper.Map<EServiceUser, UserEService>(await _userManager.FindByIdAsync(id.ToString()));
+        }
 
         public async Task<UserEService> GetByName(string name)
         {

@@ -49,8 +49,8 @@ export class ServicesComponent implements OnInit {
   facilityCtrl = new FormControl();
   selectedFacilities: ServiceFacility[] = [];
 
-  distances: number[] = [5, 10, 15, 20, 25];
-  selectedDistance: number = 5;
+  distances: number[] = [5, 10, 15, 20, 25, 30];
+  selectedDistance: number = 25;
 
   operations: ServiceOperation[];
   filteredOperations: ServiceOperation[];

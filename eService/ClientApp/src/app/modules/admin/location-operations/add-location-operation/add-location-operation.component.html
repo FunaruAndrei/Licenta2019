@@ -18,7 +18,7 @@
 
   <div class="input-row">
     <mat-form-field fxFlex>
-      <input matInput placeholder="Serviciu" aria-label="Serviciu" [matAutocomplete]="autoa" [(ngModel)]="selectedOp"
+      <input matInput placeholder="Serviciu" aria-label="Serviciu" [matAutocomplete]="autoa" 
              [formControl]="opControl"
              [disabled]="data.type=='edit'">
       <mat-autocomplete #autoa="matAutocomplete" (optionSelected)="OnOperationSelected($event.option.value)" [displayWith] = "displayFnType">

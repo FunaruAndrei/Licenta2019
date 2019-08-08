@@ -156,11 +156,28 @@
         </div>
       </div>
       <div fxFlex="25" *ngIf="showMap">
-        <agm-map [latitude]="queryUrl.latitude" [longitude]="queryUrl.longitude" [zoom]="15">
+        <agm-map [latitude]="selectedCity.latitude" [longitude]="selectedCity.longitude" [zoom]="12">
           <agm-marker *ngFor="let service of services" [latitude]="service.latitude" [longitude]="service.longitude">
-            <agm-snazzy-info-window [maxWidth]="100" [closeWhenOthersOpen]="true">
+            <agm-snazzy-info-window [closeWhenOthersOpen]="true" [closeWhenOthersOpen]="true">
               <ng-template>
-                My first Snazzy Info Window!
+                <div fxLayout="column" fxLayoutGap="5px">
+                  <div fxLayout="row" fxLayoutGap="10px">
+                    <div fxFlex="40" fxLayoutAlign="center center">
+                      <img [src]="GetSrcForService(service)" width="100%" />
+                    </div>
+                    <div fxFlex="60" fxLayout="column" fxLayoutGap="5px">
+                      <h4>
+                        {{service.name}}
+                      </h4>
+                    </div>
+                  </div>
+                  <div>
+                    <a class="w-100" mat-raised-button color="primary"
+                        [routerLink]="['/client/service', service.locationId]">
+                      Vezi detalii
+                    </a>
+                  </div>
+                </div>
               </ng-template>
             </agm-snazzy-info-window>
           </agm-marker>

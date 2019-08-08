@@ -63,7 +63,11 @@ export class AddLocationOperationComponent implements OnInit {
   }
 
   OnTypeSelected(event) {
+
     this.shownOp = this.data.op.filter(e => e.serviceOperationType.serviceOperationTypeId == event.serviceOperationTypeId);
+    this.data.item.serviceOperationId = null;
+    this.opControl.setValue("");
+    this.selectedOp = null;
   }
 
   OnOperationSelected(event: ServiceOperation) {

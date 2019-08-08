@@ -9,5 +9,6 @@ namespace Domain.IRepostories
     public interface IUserRepository
     {
         Task<UserEService> GetByName(string name);
+        Task<UserEService> GetByIdAsync(int id);
     }
 }

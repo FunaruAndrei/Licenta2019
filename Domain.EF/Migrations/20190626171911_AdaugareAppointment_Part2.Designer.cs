@@ -4,14 +4,16 @@ using Domain.EF.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Domain.EF.Migrations
 {
     [DbContext(typeof(EServiceDbContext))]
-    partial class EServiceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190626171911_AdaugareAppointment_Part2")]
+    partial class AdaugareAppointment_Part2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -116,8 +118,6 @@ namespace Domain.EF.Migrations
 
                     b.Property<string>("Phone");
 
-                    b.Property<int>("ServiceLocationId");
-
                     b.Property<int>("ServiceLocationOperationId");
 
                     b.Property<int?>("ServiceLocationOperationId1");
@@ -129,8 +129,6 @@ namespace Domain.EF.Migrations
                     b.HasKey("ServiceLocationAppointmentId");
 
                     b.HasIndex("CarManufacturerId");
-
-                    b.HasIndex("ServiceLocationId");
 
                     b.HasIndex("ServiceLocationOperationId1", "ServiceLocationOperationServiceLocationId", "ServiceLocationOperationServiceOperationId");
 
@@ -570,11 +568,6 @@ namespace Domain.EF.Migrations
                     b.HasOne("Domain.Models.Nomenclatoare.CarManufacturer", "CarManufacturer")
                         .WithMany("ServiceLocationAppointments")
                         .HasForeignKey("CarManufacturerId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Domain.Models.Services.ServiceLocation", "ServiceLocation")
-                        .WithMany()
-                        .HasForeignKey("ServiceLocationId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Domain.Models.Services.ServiceLocationOperation", "ServiceLocationOperation")

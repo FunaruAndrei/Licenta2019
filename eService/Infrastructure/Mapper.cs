@@ -4,10 +4,12 @@ using System.Text;
 using AutoMapper;
 using Domain;
 using Domain.EF.Models.Identity;
+using Domain.Models.Client;
 using Domain.Models.Identity;
 using Domain.Models.Nomenclatoare;
 using Domain.Models.Services;
 using Services.Models.Auth;
+using Services.Models.Client;
 using Services.Models.Nomenclatoare;
 using Services.Models.ServicesModels;
 
@@ -71,6 +73,9 @@ namespace Domain.EF.Utility
 
             CreateMap<ServicePromotion, ServicePromotionViewModel>();
             CreateMap<ServicePromotionViewModel, ServicePromotion>();
+
+            CreateMap<ServiceLocationAppointment, ServiceLocationAppointmentViewModel>();
+            CreateMap<ServiceLocationAppointmentViewModel, ServiceLocationAppointment>();
         }
     }
 }

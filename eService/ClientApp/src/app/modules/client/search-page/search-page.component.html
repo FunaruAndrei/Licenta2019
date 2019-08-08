@@ -13,8 +13,9 @@
             <i class="fas fa-cog fa-2x header-settings"></i>
           </span>
           <mat-menu #appMenuSettings="matMenu">
-            <a mat-menu-item *ngIf="user!=null" href="/Identity/Account/Login">Delogare</a>
-            <a mat-menu-item *ngIf="user==null">Autentifica-te</a>
+            <a mat-menu-item href="/Identity/Account/LoginAdmin">Detii un service?</a>
+            <a mat-menu-item *ngIf="user!=null" href="/Identity/Account/Logout">Delogare</a>
+            <a mat-menu-item *ngIf="user==null" href="/Identity/Account/Login">Autentifica-te</a>
           </mat-menu>
         </div>
       </div>

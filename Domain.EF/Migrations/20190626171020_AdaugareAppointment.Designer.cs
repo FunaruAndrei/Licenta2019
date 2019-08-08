@@ -4,14 +4,16 @@ using Domain.EF.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Domain.EF.Migrations
 {
     [DbContext(typeof(EServiceDbContext))]
-    partial class EServiceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190626171020_AdaugareAppointment")]
+    partial class AdaugareAppointment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,47 +96,6 @@ namespace Domain.EF.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("Domain.Models.Client.ServiceLocationAppointment", b =>
-                {
-                    b.Property<int>("ServiceLocationAppointmentId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("AppointmentTime");
-
-                    b.Property<int>("CarManufacturerId");
-
-                    b.Property<string>("CarModel");
-
-                    b.Property<int>("CarYear");
-
-                    b.Property<int>("EServiceUserId");
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("Phone");
-
-                    b.Property<int>("ServiceLocationId");
-
-                    b.Property<int>("ServiceLocationOperationId");
-
-                    b.Property<int?>("ServiceLocationOperationId1");
-
-                    b.Property<int?>("ServiceLocationOperationServiceLocationId");
-
-                    b.Property<int?>("ServiceLocationOperationServiceOperationId");
-
-                    b.HasKey("ServiceLocationAppointmentId");
-
-                    b.HasIndex("CarManufacturerId");
-
-                    b.HasIndex("ServiceLocationId");
-
-                    b.HasIndex("ServiceLocationOperationId1", "ServiceLocationOperationServiceLocationId", "ServiceLocationOperationServiceOperationId");
-
-                    b.ToTable("ServiceLocationAppointments");
                 });
 
             modelBuilder.Entity("Domain.Models.Nomenclatoare.CarManufacturer", b =>
@@ -563,23 +524,6 @@ namespace Domain.EF.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("Domain.Models.Client.ServiceLocationAppointment", b =>
-                {
-                    b.HasOne("Domain.Models.Nomenclatoare.CarManufacturer", "CarManufacturer")
-                        .WithMany("ServiceLocationAppointments")
-                        .HasForeignKey("CarManufacturerId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Domain.Models.Services.ServiceLocation", "ServiceLocation")
-                        .WithMany()
-                        .HasForeignKey("ServiceLocationId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Domain.Models.Services.ServiceLocationOperation", "ServiceLocationOperation")
-                        .WithMany("ServiceLocationAppointments")
-                        .HasForeignKey("ServiceLocationOperationId1", "ServiceLocationOperationServiceLocationId", "ServiceLocationOperationServiceOperationId");
                 });
 
             modelBuilder.Entity("Domain.Models.Nomenclatoare.ServiceOperation", b =>

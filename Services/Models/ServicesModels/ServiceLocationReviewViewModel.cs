@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Services.Models.Auth;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,5 +18,6 @@ namespace Services.Models.ServicesModels
         public int ServiceLocationId { get; set; }
 
         public int UserEServiceId { get; set; }
+        public AuthCheckUser User { get; set; }
     }
 }

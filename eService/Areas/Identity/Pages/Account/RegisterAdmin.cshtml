@@ -12,39 +12,10 @@
             </section>
             <section class="card">
                 <div class="card-header text-center">
-                    Inregistrare
+                    Inregistrare - Admin
                 </div>
                 <div class="card-body">
                     <div class="login-body">
-                        @*<form id="account" method="post">
-
-                            <div asp-validation-summary="All" class="text-danger"></div>
-                            <div class="form-group user-name">
-                                <input asp-for="Input.Email" class="form-control" />
-                                <span asp-validation-for="Input.Email" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <input asp-for="Input.Password" class="form-control" />
-                                <span asp-validation-for="Input.Password" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <div class="checkbox">
-                                    <label asp-for="Input.RememberMe">
-                                        <input asp-for="Input.RememberMe" />
-                                        @Html.DisplayNameFor(m => m.Input.RememberMe)
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="login-footer">
-                                <a class="btn btn-sm btn-secondary" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">
-                                    Cont nou
-                                </a>
-                                <button type="submit" class="btn btn-sm btn-primary float-right">
-                                    Conectare
-                                </button>
-                            </div>
-
-                        </form>*@
                         
                         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
                           
@@ -73,32 +44,6 @@
   
     </div>
   
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h4>Create a new account.</h4>
-            <hr />
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Input.Email"></label>
-                <input asp-for="Input.Email" class="form-control" />
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Password"></label>
-                <input asp-for="Input.Password" class="form-control" />
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.ConfirmPassword"></label>
-                <input asp-for="Input.ConfirmPassword" class="form-control" />
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-            </div>
-            <button type="submit" class="btn btn-primary">Register</button>
-        </form>
-    </div>
 </div>
 
 @section Scripts {

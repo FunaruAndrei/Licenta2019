@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>
+  Imagini service
+  <button class="float-right" mat-mini-fab (click)="CloseDialog()">
+    <i class="fas fa-times"></i>
+  </button>
+</h1>
+<div mat-dialog-content class="image-viewer-container" fxLayout="row">
+  <div fxFlex="5" fxLayoutAlign="center center">
+    <span class="arrow-wrapper" style="font-size: 20px;" (click)="MoveLeft()">
+      <i class="fas fa-angle-left fa-2x"></i>
+    </span>
+  </div>
+  <div fxFlex="90" fxLayoutAlign="center center">
+    <img [src]="GetSrc(data.selected)" alt="LogoImage" />
+  </div>
+  <div fxFlex="5" fxLayoutAlign="center center">
+    <span class="arrow-wrapper" style="font-size: 20px;" (click)="MoveRight()">
+      <i class="fas fa-angle-right fa-2x"></i>
+    </span>
+  </div>
+</div>

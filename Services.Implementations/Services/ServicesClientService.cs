@@ -10,6 +10,9 @@ using Services.Models.Client;
 using Services.Services;
 using GeoCoordinatePortable;
 using Services.Models.ServicesModels;
+using Domain.IRepostories;
+using Domain.Models.Identity;
+using Services.Models.Auth;
 
 namespace Services.Implementations.Services
 {
@@ -17,13 +20,16 @@ namespace Services.Implementations.Services
     {
         private readonly IMapper _mapper;
         private readonly IServiceLocationRepository _locationRepository;
+        private readonly IUserRepository _userRepository;
 
         public ServicesClientService(
             IMapper mapper,
-            IServiceLocationRepository locationRepository)
+            IServiceLocationRepository locationRepository,
+            IUserRepository userRepository)
         {
             _mapper = mapper;
             _locationRepository = locationRepository;
+            _userRepository = userRepository;
         }
 
         public async Task<IEnumerable<ServiceClientViewModel>> GetServices(ServicesClientRequest req)
@@ -87,7 +93,7 @@ namespace Services.Implementations.Services
                 Distance = GetDistance(reqCoordinate, e.Latitude, e.Longitude),
                 Image =  e.ServiceLocationPhotos.FirstOrDefault().Link,
                 NoImages = e.ServiceLocationPhotos.Count(),
-                ReviewAvg =  e.ServiceLocationReviews.Select(z=>z.Rate).DefaultIfEmpty(0).Average(),
+                ReviewAvg =  Math.Round( e.ServiceLocationReviews.Select(z=>z.Rate).DefaultIfEmpty(0).Average(),1),
                 Comments = e.ServiceLocationReviews.Count(z => z.Review.Length > 0),
                 Longitude =  (double)e.Longitude,
                 Latitude = (double)e.Latitude
@@ -100,7 +106,7 @@ namespace Services.Implementations.Services
         {
             ServiceLocation service = await _locationRepository.GetById(id);
 
-            return new ServiceDetailViewModel()
+            var item = new ServiceDetailViewModel()
             {
                 ServiceLocation = _mapper.Map<ServiceLocation, ServiceLocationViewModel>(service),
                 ServiceInfo = _mapper.Map<ServiceInfo, ServiceInfoViewModel>(service.ServiceInfo),
@@ -115,6 +121,12 @@ namespace Services.Implementations.Services
 
 
             };
+
+            foreach(var el in item.ServiceReviews) {
+                el.User = _mapper.Map<UserEService, AuthCheckUser>( await this._userRepository.GetByIdAsync(el.UserEServiceId));
+            }
+
+            return item;
         }
 
         private double GetDistance(GeoCoordinate reqCoordinate, decimal el_lat, decimal el_long)

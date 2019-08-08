@@ -51,6 +51,10 @@ namespace eService.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
+            if (!User.IsInRole("Admin"))
+            {
+                await _signInManager.SignOutAsync();
+            }
             if (!string.IsNullOrEmpty(ErrorMessage))
             {
                 ModelState.AddModelError(string.Empty, ErrorMessage);
@@ -93,7 +97,7 @@ namespace eService.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Email sau parola incorecta.");
                     return Page();
                 }
             }

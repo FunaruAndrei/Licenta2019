@@ -1,6 +1,6 @@
 <div class="search-page-wrapper">
-  <div fxLayout="column">
-    <section class="header-section" fxLayout="column" fxLayoutAlign="center">
+  <div fxLayout="column" *ngIf="details">
+    <section  id="go-top" class="header-section" fxLayout="column" fxLayoutAlign="center">
       <div fxLayout="row" fxLayoutAlign="center center">
         <div fxFlex="5">
 
@@ -20,58 +20,58 @@
       </div>
 
       <!--<div class="header-content" fxLayout="column" fxLayoutGap="20px">
-        <div fxLayoutAlign="center center" class="header-slogan" fxLayout="column">
-          <h1>Alege cel mai bun service</h1>
-          <h4>Service-urile auto sunt pretutindeni</h4>
-        </div>
+      <div fxLayoutAlign="center center" class="header-slogan" fxLayout="column">
+        <h1>Alege cel mai bun service</h1>
+        <h4>Service-urile auto sunt pretutindeni</h4>
+      </div>
 
-        <div fxLayout="row">
-          <div fxFlex="20"></div>
-          <div fxFlex="60" fxLayout="row" class="header-search">
-            <div class="header-search-city" fxFlex="30">
-              <mat-form-field class="w-100">
-                <input matInput placeholder="Oras" aria-label="Oras" [matAutocomplete]="auto" [formControl]="cityCtrl">
-                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="CitySelected($event.option.value)">
-                  <mat-option *ngFor="let state of filteredCities | async" [value]="state">
-                    <span>{{state.name}}</span> |
-                    <small>Judet: {{state.judet}}</small>
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
-            </div>
-            <div class="header-search-city" fxFlex="30" style="padding-left: 20px;">
-              <mat-form-field class="w-100">
-                <input matInput placeholder="Tip serviciu" aria-label="Tip serviciu" [matAutocomplete]="autoa" [formControl]="typeCtrl">
-                <mat-autocomplete #autoa="matAutocomplete" [displayWith]="displayFn" (optionSelected)="TypeSelected($event.option.value)">
-                  <mat-option *ngFor="let type of filteredTypes | async" [value]="type">
-                    <img class="mr-3" aria-hidden [src]="'/images/Operations/' + type.icon" height="25">
-                    <span>{{type.name}}</span>
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
-            </div>
-            <div class="header-search-city" fxFlex="30" style="padding-left: 20px;">
-              <mat-form-field class="w-100">
-                <input matInput placeholder="Brand masina" aria-label="Brand masina" [matAutocomplete]="autob" [formControl]="brandCtrl">
-                <mat-autocomplete #autob="matAutocomplete" [displayWith]="displayFn" (optionSelected)="BrandSelected($event.option.value)">
-                  <mat-option *ngFor="let bd of filteredBrands | async" [value]="bd">
-                    <img class="mr-3" aria-hidden [src]="'/images/CarLogos/' + bd.icon" height="25">
-                    <span>{{bd.name}}</span>
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
-            </div>
-            <div fxFlex="10" style="padding-left: 20px; padding-top: 10px;">
-              <a mat-button color="primary" class="w-100"
-                 (click)="GoToServices()">
-                Cauta
-              </a>
-            </div>
+      <div fxLayout="row">
+        <div fxFlex="20"></div>
+        <div fxFlex="60" fxLayout="row" class="header-search">
+          <div class="header-search-city" fxFlex="30">
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Oras" aria-label="Oras" [matAutocomplete]="auto" [formControl]="cityCtrl">
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="CitySelected($event.option.value)">
+                <mat-option *ngFor="let state of filteredCities | async" [value]="state">
+                  <span>{{state.name}}</span> |
+                  <small>Judet: {{state.judet}}</small>
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
           </div>
-
-          <div fxFlex="20"></div>
+          <div class="header-search-city" fxFlex="30" style="padding-left: 20px;">
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Tip serviciu" aria-label="Tip serviciu" [matAutocomplete]="autoa" [formControl]="typeCtrl">
+              <mat-autocomplete #autoa="matAutocomplete" [displayWith]="displayFn" (optionSelected)="TypeSelected($event.option.value)">
+                <mat-option *ngFor="let type of filteredTypes | async" [value]="type">
+                  <img class="mr-3" aria-hidden [src]="'/images/Operations/' + type.icon" height="25">
+                  <span>{{type.name}}</span>
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+          <div class="header-search-city" fxFlex="30" style="padding-left: 20px;">
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Brand masina" aria-label="Brand masina" [matAutocomplete]="autob" [formControl]="brandCtrl">
+              <mat-autocomplete #autob="matAutocomplete" [displayWith]="displayFn" (optionSelected)="BrandSelected($event.option.value)">
+                <mat-option *ngFor="let bd of filteredBrands | async" [value]="bd">
+                  <img class="mr-3" aria-hidden [src]="'/images/CarLogos/' + bd.icon" height="25">
+                  <span>{{bd.name}}</span>
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+          <div fxFlex="10" style="padding-left: 20px; padding-top: 10px;">
+            <a mat-button color="primary" class="w-100"
+               (click)="GoToServices()">
+              Cauta
+            </a>
+          </div>
         </div>
-      </div>-->
+
+        <div fxFlex="20"></div>
+      </div>
+    </div>-->
 
     </section>
     <section class="basic-info" fxLayout="row">
@@ -82,7 +82,7 @@
         <div fxFlex="30" fxLayoutAlign="start center">
           <div class="basic-info-container" fxLayout="column" fxLayoutAlign="space-around">
             <div class="basic-info-logo" fxLayoutAlign="center center">
-              <img [src]="GetLogoSrc()"/>
+              <img [src]="GetLogoSrc()" />
             </div>
             <div class="p-2">
               <button fxFlex mat-raised-button color="primary" (click)="RegisterAppointment()">
@@ -98,20 +98,26 @@
                 <span>{{GetPhoneNumber()}}</span>
               </button>
 
-              <button fxFlex mat-stroked-button color="primary">
+              <a fxFlex mat-stroked-button color="primary" [ngx-scroll-to]="'address-section'" [ngx-scroll-to-offset]="-50">
                 <span>Afisati adresa</span>
-              </button>
+              </a>
             </div>
           </div>
-        
+
         </div>
         <div fxFlex="70" class="basic-info-nav-container">
-          <div class="basic-info-navigate" fxLayout="row" fxLayoutAlign="space-around center">
+          <div class="basic-info-navigate" fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="10px;">
             <div fxFlex>
-              <button mat-button class="w-100">aaa</button>
+              <a mat-button class="w-100" [ngx-scroll-to]="'servicii-section'" [ngx-scroll-to-offset]="-50">Servicii</a>
             </div>
             <div fxFlex>
-              <button mat-button class="w-100">bbb</button>
+              <a mat-button class="w-100" [ngx-scroll-to]="'photos-section'" [ngx-scroll-to-offset]="-50">Fotografii</a>
+            </div>
+            <div fxFlex>
+              <a mat-button class="w-100" [ngx-scroll-to]="'reviews-section'" [ngx-scroll-to-offset]="-50">Review-uri</a>
+            </div>
+            <div fxFlex>
+              <a mat-button class="w-100" [ngx-scroll-to]="'description-section'" [ngx-scroll-to-offset]="-50">Descriere</a>
             </div>
           </div>
         </div>
@@ -125,8 +131,38 @@
       </div>
       <div fxFlex="60" class="name-section-body">
         <div fxLayout="row" fxLayoutGap="15px">
-          <div fxFlex="60">
+          <div fxFlex="60" fxLayout="column" fxLayoutGap="25px">
             <h1 id="service-name">{{details.serviceInfo.nume}}</h1>
+            <div fxFlex class="car-manufacturers-section" fxLayout="row" fxLayoutGap="10px">
+              <div fxFlex="20" fxLayoutAlign="center center">
+                <span class="fa-stack fa-2x">
+                  <i class="far fa-circle fa-stack-2x" style="width:1em;"></i>
+                  <i class="fas fa-tools fa-stack-1x" style=""></i>
+                </span>
+              </div>
+              <div fxFlex="80" class="brand-service-list">
+                <h4 class="text-muted">
+                  Brand-uri masini acceptate:
+                </h4>
+                <div class="">
+                  <span *ngFor="let brand of details.serviceManufacturers" style="font-weight: 600">
+                    {{GetCarBrandName(brand)}}<span *ngIf="NotLastBrand(brand)">,</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="service-program-div" fxFlex="40" fxLayout="row" fxLayoutGap="10px">
+            <div fxFlex="30" fxLayoutAlign="center center">
+              <i id="program-clock" class="far fa-clock fa-5x"></i>
+            </div>
+            <div fxFlex="70" fxLayout="column" fxLayoutGap="5px">
+              <div *ngFor="let program of details.serviceProgram" fxLayout="row">
+                <div class="program-label">{{GetWeekDay(program)}}:</div>
+                <div class="example-spacer"></div>
+                <div>{{GetProgramHours(program)}}</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -134,34 +170,265 @@
 
       </div>
     </section>
-    <!--<section class="service-categories after-counter" fxLayout="row">
-      <div fxFlex="20">
 
-      </div>
-      <div fxFlex="60">
-        <h2 class="section-title">
-          Categorii de servicii
-        </h2>
-        <div class="service-categories-types" fxLayout="row" fxLayoutAlign="space-between center">
-          <button mat-button *ngFor="let type of opTypes" fxLayoutAlign="center center" matTooltip="{{type.name}}" (click)="SelectType(type)">
-            <img aria-hidden [src]="'/images/Operations/' + type.icon" height="50">
-          </button>
-        </div>
+    <section class="facilities-section" fxLayout="row" fxLayoutGap="10px">
+      <div fxFlex="20"></div>
+      <div fxFlex="80" fxLayout="column">
         <div>
-          <h3 class="service-categories-types-selected">
-            Categorie servicii <span>{{displayFn(selectedType)}}</span>
+          <h3>
+            <i class="fas fa-hand-holding-usd" style="color: #4a5dc4"></i>
+            Facilitati in aceasta locatie
+
           </h3>
         </div>
-        <div fxLayout="row wrap" class="service-categories-items" fxLayoutGap="10px">
-          <span fxFlex="0 1 calc(25%-10px)" *ngFor="let op of filteredOperations" fxLayoutAlign="center center">
-            {{op.name}}
-          </span>
+        <div>
+          <hr style="border-top:2px solid rgba(0, 0, 0, 0.1); margin-left:30px;margin-right: 30px;" />
+        </div>
+        <div fxLayout="row" fxLayoutGap="10px">
+          <div fxFlex="0 1 calc(14.2%-10px)" *ngFor="let op of details.serviceFacilities" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="5px">
+            <div class="facility-icon">
+              <i class="fas" [class]="GetFacilityIcon(op)"></i>
+            </div>
+            <div class="text-center">
+              <span class="facility-name">
+                {{GetFacilityName(op)}}
+              </span>
+            </div>
+          </div>
         </div>
       </div>
       <div fxFlex="20">
       </div>
-    </section>-->
+    </section>
+    <section class="servicii-section" id="servicii-section" fxLayout="row">
+      <div fxFlex="20">
 
-    <section class="partners-section last-section"></section>
+      </div>
+      <div fxFlex="80" fxLayout="column">
+        <div>
+          <h3>
+            <i class="fas fa-toolbox" style="color: #4a5dc4"></i>
+            Servicii
+          </h3>
+        </div>
+
+        <div>
+          <hr style="border-top:2px solid rgba(0, 0, 0, 0.1); margin-left:30px;margin-right: 30px;" />
+        </div>
+        <div class="servicii-container" fxLayout="row">
+          <div fxFlex="30" class="servicii-types">
+            <mat-list>
+              <mat-list-item *ngFor="let type of shownTypes" [class]="GetServiciiActiveClass(type)" (click)="SelectServiciiType(type)">
+                <img class="mr-3" [src]="'/images/Operations/' + type.icon" height="25">
+                {{type.name}}
+              </mat-list-item>
+
+            </mat-list>
+          </div>
+          <div fxFlex="70" class="servicii-operations">
+            <mat-list>
+              <mat-list-item *ngFor="let op of selectedShownOperations">
+                <div class="container-fluid" fxLayout="row">
+                  <div fxFlex="70" class="servicii-operations-name" fxLayoutAlign="start center">
+                    {{op.description.name}}
+                  </div>
+
+                  <div fxFlex="30" fxLayout="column" class="servicii-operations-values text-muted">
+                    <div fxLayoutAlign="end center">
+                      <div> De la &ensp;<b style="color: #4a5dc4">{{op.values.price}}</b>&ensp; de LEI</div>
+                    </div>
+                    <div fxLayoutAlign="end center">
+                      <div> In maxim &ensp;<b style="color: #4a5dc4">{{op.values.time}}</b>&ensp; minute</div>
+                    </div>
+                  </div>
+                </div>
+              </mat-list-item>
+            </mat-list>
+          </div>
+        </div>
+      </div>
+      <div fxFlex="20">
+
+      </div>
+    </section>
+    <section fxLayout="row" id="photos-section" class="photos-section" fxLayoutGap="10px">
+      <div fxFlex="20">
+
+      </div>
+      <div fxFlex="80" fxLayout="column">
+        <div>
+          <h3>
+            <i class="fas fa-camera" style="color: #4a5dc4"></i>
+            Fotografii
+          </h3>
+        </div>
+
+        <div>
+          <hr style="border-top:2px solid rgba(0, 0, 0, 0.1); margin-left:30px;margin-right: 30px;" />
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="25px;">
+          <div class="img-flex mat-elevation-z3" fxFlex="calc(25% - 25px)" *ngFor="let photo of details.servicePhotos" fxLayoutAlign="center center">
+            <img [src]="GetSrcForPhoto(photo)" />
+            <div class="overlay-picture"></div>
+            <button type="button" mat-mini-fab color="" matTooltip="Vizualizeaza imaginea!" (click)="OpenImage(photo)">
+              <i class="far fa-eye"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div fxFlex="20">
+
+      </div>
+    </section>
+    <section fxLayout="row" id="reviews-section" class="reviews-section" fxLayoutGap="10px">
+      <div fxFlex="20">
+
+      </div>
+      <div fxFlex="80" fxLayout="column">
+        <div>
+          <h3>
+            <i class="fas fa-comment" style="color: #4a5dc4"></i>
+            Review-uri
+            <!--<button mat-button color="primary" class="float-right">
+              <i class="fas fa-plus"></i> Aduga review
+            </button>-->
+          </h3>
+
+        </div>
+
+        <div>
+          <hr style="border-top:2px solid rgba(0, 0, 0, 0.1); margin-left:30px;margin-right: 30px;" />
+        </div>
+        <div class="review-container" fxLayout="column">
+          <div fxFlex *ngIf="!details || details.serviceReviews.length == 0" fxLayoutAlign="center center" class="no-review-class">
+            Momentan nu exista review-uri pentru acest service, fii primul!
+          </div>
+          <div fxFlex *ngIf="details" fxLayout="row wrap" fxLayoutGap="20px">
+            <div fxFlex="calc(50% - 20px)" class="review-tile" *ngFor="let rev of details.serviceReviews" fxLayout="column">
+              <div fxLayout="row" class="text-muted" style="margin-top: 5px;">
+                <div fxFlex fxLayout="column" fxLayoutAlign="center start">
+                  <div>
+                    {{rev.user.userName}}
+                  </div>
+                  <div style="font-size: 13px;">
+                    {{rev.dateTime | date:'dd/MMM/yyyy HH:mm:ss'}}
+                  </div>
+
+                </div>
+                <div fxFlex fxLayoutAlign="end end">
+                  <bar-rating class="d-inline-block" [(rate)]="rev.rate" [max]="5" [readOnly]="true"></bar-rating> {{rev.rate}}
+                </div>
+              </div>
+              <hr style="border-top:2px solid rgba(0, 0, 0, 0.1); margin-left:20px;margin-right: 20px;" />
+              <div fxLayoutAlign="center center" fxLayout="column">
+                <div *ngIf="rev.toggle==false">
+                  {{rev.review | truncate:50: '...': true}}
+                </div>
+                <div *ngIf="rev.toggle==true">
+                  {{rev.review}}
+                </div>
+                <div *ngIf="rev.review.length>50" class="text-center">
+                  <button *ngIf="rev.toggle==false" mat-button color="primary" (click)="rev.toggle=true">
+                    Afiseaza tot comentariul
+                  </button>
+                  <button *ngIf="rev.toggle==true" mat-button color="accent" (click)="rev.toggle=false">
+                    Ascunde tot comentariul
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div fxFlex="20">
+
+      </div>
+    </section>
+
+
+
+    <section id="address-section" class="address-section">
+      <div fxFlex="20">
+
+      </div>
+      <div fxFlex="80" fxLayout="column">
+        <div>
+          <h3>
+            <i class="fas fa-map" style="color: #4a5dc4"></i>
+            Adresa
+          </h3>
+        </div>
+
+        <div>
+          <hr style="border-top:2px solid rgba(0, 0, 0, 0.1); margin-left:30px;margin-right: 30px;" />
+        </div>
+        <div fxFlex fxLayout="row" fxLayoutGap="20px" class="address-container">
+          <div fxFlex="70">
+            <agm-map [latitude]="details.serviceLocation.latitude" [longitude]="details.serviceLocation.longitude" [zoom]="15">
+              <agm-marker [latitude]="details.serviceLocation.latitude" [longitude]="details.serviceLocation.longitude">
+              </agm-marker>
+            </agm-map>
+          </div>
+          <div fxFlex="30" fxLayout="column" fxLayoutGap="10px">
+            <h4>
+              Adresa:
+            </h4>
+            <div class="text-muted">
+              {{details.serviceLocation.city.judet}}, {{details.serviceLocation.city.name}}
+            </div>
+            <div class="text-muted">
+              {{details.serviceLocation.address}}
+            </div>
+            <div>
+              <button mat-button color="primary" (click)="OpenGoogleMaps()">
+                Deschide in Google Maps
+              </button>
+            </div>
+            <div>
+              <hr style="border-top:2px solid rgba(0, 0, 0, 0.1); margin-right: 20px;" />
+            </div>
+            <h4>
+              Contact:
+            </h4>
+            <div *ngFor="let contact of details.serviceContacts">
+              <i class="fas" [class]="GetTypeForContact(contact)"></i> {{contact.value}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div fxFlex="20">
+
+      </div>
+    </section>
+
+    <section id="description-section" class="description-section last-section">
+      <div fxFlex="20">
+
+      </div>
+      <div fxFlex="80" fxLayout="column">
+        <div>
+          <h3>
+            <i class="fas fa-file-alt" style="color: #4a5dc4"></i>
+            Descriere
+          </h3>
+        </div>
+
+        <div>
+          <hr style="border-top:2px solid rgba(0, 0, 0, 0.1); margin-left:30px;margin-right: 30px;" />
+        </div>
+        <div fxFlex fxLayout="row" fxLayoutGap="20px" class="description-container">
+          <pre> {{details.serviceInfo.descriere}}</pre>
+        </div>
+      </div>
+      <div fxFlex="20">
+
+      </div>
+    </section>
+
   </div>
+  <button mat-fab id="go-top-button" [ngx-scroll-to]="'go-top'">
+    <i class="fas fa-angle-up fa-2x"></i>
+  </button>
 </div>
+
+

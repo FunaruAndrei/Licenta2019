@@ -20,10 +20,12 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { ServiceComponent } from './service/service.component';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 import { AppointmentComponent } from './service/appointment/appointment.component';
+import { NgPipesModule } from 'ng-pipes';
+import { ImageViewerClientComponent } from './service/image-viewer-client/image-viewer-client.component';
 
 @NgModule({
   declarations: [ClientLayoutComponent, SearchPageComponent,
-                 ServicesComponent, ServiceComponent, AppointmentComponent],
+                 ServicesComponent, ServiceComponent, AppointmentComponent, ImageViewerClientComponent],
   imports: [
     CommonModule, ClientRoutingModule,
     FlexLayoutModule,  DemoMaterialModule,
@@ -34,7 +36,7 @@ import { AppointmentComponent } from './service/appointment/appointment.componen
       apiKey: 'AIzaSyAU2yqZKf_fmbeMaRMzFUpkJf_ofXmX9Eg'
     }),  NgxMaterialTimepickerModule,
     BarRatingModule, AgmSnazzyInfoWindowModule,
-    ClipboardModule
+    ClipboardModule, NgPipesModule
   ],
   providers: [
     {
@@ -45,7 +47,8 @@ import { AppointmentComponent } from './service/appointment/appointment.componen
     }
   ],
   entryComponents: [
-    AppointmentComponent
+    AppointmentComponent,
+    ImageViewerClientComponent
   ]
 })
 export class ClientModule { }

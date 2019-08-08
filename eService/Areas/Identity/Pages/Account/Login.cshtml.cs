@@ -17,11 +17,13 @@ namespace eService.Areas.Identity.Pages.Account
     public class LoginModel : PageModel
     {
         private readonly SignInManager<EServiceUser> _signInManager;
+        private readonly UserManager<EServiceUser> _userManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<EServiceUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<EServiceUser> signInManager, UserManager<EServiceUser> userManager, ILogger<LoginModel> logger)
         {
             _signInManager = signInManager;
+            _userManager = userManager;
             _logger = logger;
         }
 
@@ -37,11 +39,11 @@ namespace eService.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Pentru autentificare este obligatorie introducerea unei adrese de email.")]
             [EmailAddress]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Pentru autentificare este obligatorie introducerea parolei aferente contului!")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
@@ -51,6 +53,11 @@ namespace eService.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
+            if (User.IsInRole("Admin"))
+            {
+                await _signInManager.SignOutAsync();
+            }
+
             if (!string.IsNullOrEmpty(ErrorMessage))
             {
                 ModelState.AddModelError(string.Empty, ErrorMessage);
@@ -74,24 +81,34 @@ namespace eService.Areas.Identity.Pages.Account
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
-                if (result.Succeeded)
+
+                var usr = await _userManager.FindByEmailAsync(Input.Email);
+                if (usr !=null)
                 {
-                    _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
-                }
-                if (result.RequiresTwoFactor)
-                {
-                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
-                }
-                if (result.IsLockedOut)
-                {
-                    _logger.LogWarning("User account locked out.");
-                    return RedirectToPage("./Lockout");
+                    var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
+                    if (result.Succeeded)
+                    {
+                        _logger.LogInformation("User logged in.");
+                        return LocalRedirect(returnUrl);
+                    }
+                    if (result.RequiresTwoFactor)
+                    {
+                        return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
+                    }
+                    if (result.IsLockedOut)
+                    {
+                        _logger.LogWarning("User account locked out.");
+                        return RedirectToPage("./Lockout");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Date de conectare incorecte.");
+                        return Page();
+                    }
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Date de conectare incorecte.");
                     return Page();
                 }
             }

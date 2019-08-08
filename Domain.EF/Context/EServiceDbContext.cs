@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domain.EF.Models.Identity;
+using Domain.Models.Client;
 using Domain.Models.Nomenclatoare;
 using Domain.Models.Services;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -35,6 +36,7 @@ namespace Domain.EF.Context
         public DbSet<ServiceManufacturer> ServiceManufacturers { get; set; }
         public DbSet<ServiceProgram> ServicePrograms { get; set; }
         public DbSet<ServicePromotion> ServicePromotions { get; set; }
+        public DbSet<ServiceLocationAppointment> ServiceLocationAppointments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

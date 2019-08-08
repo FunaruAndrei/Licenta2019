@@ -35,6 +35,7 @@ namespace eService.Infrastructure
             services.AddTransient<ILocationPhotoService, LocationPhotoService>();
             services.AddTransient<ISearchPageService, SearchPageService>();
             services.AddTransient<IServicesClientService, ServicesClientService>();
+            services.AddTransient<IAppointmentService, AppointmentService>();
 
             //Repositories
             services.AddTransient< IServiceInfoRepository, ServiceInfoRepository>();
@@ -57,6 +58,7 @@ namespace eService.Infrastructure
             services.AddTransient<IServiceLocationProgramRepository, ServiceLocationProgramRepository>();
             services.AddTransient<IServiceLocationReviewRepository, ServiceLocationReviewRepository>();
 
+            services.AddTransient<IServiceLocationAppointmentRepository, ServiceLocationAppointmentRepository>();
         }
     }
 }

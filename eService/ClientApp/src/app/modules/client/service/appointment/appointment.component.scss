@@ -1,0 +1,21 @@
+.appointment-body {
+  padding: 15px;
+
+  .header-apointment {
+    position: relative;
+    padding-bottom: 15px;
+  }
+
+  .header-apointment::before {
+    content: "";
+    width: 80px;
+    height: 4px;
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    background: -webkit-gradient(linear,left top,right top,from(#5d6fd3),to(#4a5dc4));
+    background: -webkit-linear-gradient(left,#5d6fd3,#4a5dc4);
+    background: -o-linear-gradient(left,#5d6fd3 0,#4a5dc4 100%);
+    background: linear-gradient(90deg,#5d6fd3 0,#4a5dc4);
+  }
+}
